@@ -1,0 +1,15 @@
+.card {
+  background-color: black;
+  color: white;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  position: relative;
+  /*display: flex;*/
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
