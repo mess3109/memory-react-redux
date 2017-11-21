@@ -96,7 +96,6 @@ checkMatch(flippedCardsClone, cardsClone) {
   }
 }
 
-
 componentWillUnmount() {
   this.cleanUpInterval()
 }
