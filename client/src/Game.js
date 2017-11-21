@@ -27,7 +27,8 @@ let images = shuffle(cardsOrig.concat(cardsOrig))
 const initialState = {
   cards: [],
   flippedCards: [],
-  counter: 0
+  counter: 0,
+  timer: 0
 };
 
 
@@ -54,8 +55,10 @@ startGame = () => {
   this.setState({
     cards: cards,
     flippedCards: [],
-    counter: 0
+    counter: 0,
+    timer: 0
   });
+  this.startInterval();
 }
 
 flipCard = id => {
@@ -94,11 +97,31 @@ checkMatch(flippedCardsClone, cardsClone) {
 }
 
 
+componentWillUnmount() {
+  this.cleanUpInterval()
+}
+
+updateTimer = () => {
+  this.setState({
+    timer: this.state.timer + 1
+  })
+}
+
+startInterval = () => {
+  this.interval = setInterval(this.updateTimer, 1000);
+}
+
+cleanUpInterval = () => {
+  clearInterval(this.interval);
+}
+
+
 render() {
  return (
   <div>
   <button onClick={() => this.startGame()}>Start New Game</button>
   <p>Turn Count: {this.state.counter}</p>
+  <p>Timer: {this.state.timer}</p>
   <Cards cards={this.state.cards} flipCard={this.flipCard} />
   </div>
   );
