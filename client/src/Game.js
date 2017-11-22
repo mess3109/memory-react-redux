@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Cards from './Cards.js'
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { start } from '../src/actions/start';
 
 let cardsOrig = []
 let cards = []
@@ -32,11 +34,16 @@ const initialState = {
 };
 
 
-export default class Game extends Component {
+class Game extends Component {
 
-  constructor() {
-    super();
-    this.state = initialState
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: [],
+      flippedCards: [],
+      counter: 0,
+      timer: 0
+    }
   }
 
   setCards() {
@@ -51,15 +58,17 @@ export default class Game extends Component {
 
 //flippedCards and cards are not re-rendering yet
 startGame = () => {
-  this.setCards();
-  this.setState({
-    cards: cards,
-    flippedCards: [],
-    counter: 0,
-    timer: 0
-  });
+  // this.setCards();
+  // this.setState({
+  //   cards: cards,
+  //   flippedCards: [],
+  //   counter: 0,
+  //   timer: 0
+  // });
   this.startInterval();
+  this.props.start()
 }
+
 
 flipCard = id => {
   let counter = this.state.counter
@@ -116,13 +125,30 @@ cleanUpInterval = () => {
 
 
 render() {
+ const { game } = this.props;
+
  return (
   <div>
   <button onClick={() => this.startGame()}>Start New Game</button>
-  <p>Turn Count: {this.state.counter}</p>
-  <p>Timer: {this.state.timer}</p>
-  <Cards cards={this.state.cards} flipCard={this.flipCard} />
+  <p>Turn Count: {game.counter}</p>
+  <p>Timer: {game.timer}</p>
+  <Cards cards={game.cards} flipCard={this.flipCard} />
   </div>
   );
 }
 }
+
+const mapStateToProps = (state) => ({ 
+    game: state.game
+  });
+
+
+const mapDispatchToProps = (dispatch) => {
+
+  return bindActionCreators({  
+    start: start
+  }, dispatch)
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

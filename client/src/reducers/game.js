@@ -27,11 +27,25 @@ const initialState = {
   timer: 0
 };
 
-export default function gameReducer(state = initialState, action) {
+for (i = 0; i < images.length; i++) {
+  cards[i] = {
+    id: i, 
+    image: images[i],
+    isFlipped: false
+  }
+}
+
+
+export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
-      return Object.assign({});
+    return ({
+      cards: cards,
+      flippedCards: [],
+      counter: 0,
+      timer: 0
+    });
     default:
-      return state;
+    return state;
   }
 }

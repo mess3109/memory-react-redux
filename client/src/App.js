@@ -7,7 +7,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Game />
+        <Game store={this.props.store}/>
      </div>
     );
   }
