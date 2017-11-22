@@ -2,43 +2,14 @@ import React, { Component } from 'react'
 import Cards from '../components/Cards.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { start, flipCard, checkMatch } from '../actions/game';
-
-let cardsOrig = []
-let cards = []
-
-function shuffle(array) {
-  let temp = null
-  let j = 0
-
-  for (var i = 0; i < array.length; i++) {
-    j = Math.floor(Math.random() * (i + 1))
-    temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-  }
-  return array
-}
-
-for (var i = 0; i < 8; i++) {
-  cardsOrig[i] = i + 1
-}
-
-let images = shuffle(cardsOrig.concat(cardsOrig))
-
-const initialState = {
-  cards: [],
-  flippedCards: [],
-  counter: 0,
-  timer: 0
-};
-
+import { start, flipCard, checkMatch, endGame } from '../actions/game';
 
 class Game extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      loading: false, 
       cards: [],
       flippedCards: [],
       counter: 0,
@@ -63,8 +34,7 @@ class Game extends Component {
 
 updateTimer = () => {
   this.setState({
-    timer: this.state.timer + 1
-  })
+    timer: this.state.timer + 1}, () => {this.gameOver()})
 }
 
 startInterval = () => {
@@ -75,6 +45,18 @@ cleanUpInterval = () => {
   clearInterval(this.interval);
 }
 
+gameOver() {
+  const timer = this.state.timer
+  let check = this.props.game.cards.find((card) => {return card.isFlipped === false}  )
+  if (!check) {
+    this.props.endGame(timer)
+  }
+}
+
+winGame() {
+  this.props.game.cards.map((card) => {return card.isFlipped = true})
+}
+
 
 render() {
  const { game, flipCard } = this.props;
@@ -82,6 +64,7 @@ render() {
  return (
   <div>
   <button onClick={() => this.startGame()}>Start New Game</button>
+  <button onClick={() => this.winGame()}>Win Game</button>
   <p>Turn Count: {game.counter}</p>
   <p>Timer: {this.state.timer}</p>
   <Cards cards={game.cards} flipCard={flipCard} />
@@ -99,7 +82,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({  
     start: start,
     flipCard: flipCard,
-    checkMatch: checkMatch
+    checkMatch: checkMatch,
+    endGame: endGame
   }, dispatch)
 };
 

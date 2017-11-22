@@ -24,7 +24,10 @@ const initialState = {
   cards: [],
   flippedCards: [],
   counter: 0,
-  timer: 0
+  timer: 0,
+  scores: [],
+  loading: false,
+  endGame: false
 };
 
 for (i = 0; i < images.length; i++) {
@@ -39,10 +42,13 @@ export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
     return ({
+      endGame: false,
+      loading: false,
       cards: cards,
       flippedCards: [],
       counter: 0,
-      timer: 0
+      timer: 0,
+      scores: []
     });
 
     case 'FLIP_CARD':
@@ -67,6 +73,15 @@ export default function game(state = initialState, action) {
       cardsClone.filter((card) => { return card.id === flippedCardsClone[0].id || card.id === flippedCardsClone[1].id } ).map( (card) => { return card.isFlipped = false })
     }
     return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter});
+
+    case 'GET_SCORES':
+    return Object.assign({}, state, { loading: true }) 
+
+    case 'SHOW_SCORES':
+    return {loading: false, scores: action.payload}
+
+    case 'END_GAME':
+    return Object.assign({}, state, { endGame: true })
 
     default:
     return state;

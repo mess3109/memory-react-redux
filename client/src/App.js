@@ -7,16 +7,16 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default class App extends Component {
 
-render() {
-	return (
-		<Router>
+	render() {
+		return (
+			<Router>
 			<div>
-				<NavBar />
-				<Route exact path="/" component={Game} />
-				<Route exact path="/scores" component={Scores} />
+			<NavBar />
+			<Route exact path="/" component={Game} />
+			<Route exact path="/scores" component={Scores} />
 			</div>
-		</Router>
-		);
-}
+			</Router>
+			);
+	}
 }
 

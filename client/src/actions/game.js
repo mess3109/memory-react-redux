@@ -18,3 +18,26 @@ export const checkMatch = (flippedCards, cards) => {
 		flippedCards
 	};
 };
+
+export function scores() {
+	return (dispatch) => {
+		dispatch({ type: 'GET_SCORES' })
+		return fetch('/api/games')
+		.then(response => response.json())
+		.then(responseJson => dispatch({ type: 'SHOW_SCORES', payload: responseJson }))
+	}
+};
+
+export function endGame(timer) {
+  const score = JSON.stringify({
+    game: {
+      timer: timer
+    }
+  });
+  return (dispatch) => {
+    dispatch({ type: 'END_GAME' })
+    return fetch('/api/games', {
+      method: "post", body: score, headers: { "Content-Type": "application/json" }})
+      .then(response => response.json())
+  }
+}
