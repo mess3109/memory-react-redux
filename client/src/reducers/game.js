@@ -35,7 +35,6 @@ for (i = 0; i < images.length; i++) {
   }
 }
 
-
 export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
@@ -45,6 +44,30 @@ export default function game(state = initialState, action) {
       counter: 0,
       timer: 0
     });
+
+    case 'FLIP_CARD':
+    let counter = state.counter
+    let cardsClone = state.cards
+    cardsClone[action.id].isFlipped = true
+    let flippedCardsClone = state.flippedCards
+    if ((flippedCardsClone.length === 0 || flippedCardsClone[0].id !== action.id) && flippedCardsClone.length < 2) {
+      flippedCardsClone.push(cardsClone[action.id])
+    }
+    if (flippedCardsClone.length === 2) {
+      counter++
+    } 
+    return Object.assign({}, {cards: cardsClone, flippedCards: flippedCardsClone, counter: counter});
+
+    case 'CHECK_MATCH':
+    flippedCardsClone = action.flippedCards
+    cardsClone = action.cards
+    if (flippedCardsClone[0].image === flippedCardsClone[1].image) {
+      console.log('match!')
+    } else {
+      cardsClone.filter((card) => { return card.id === flippedCardsClone[0].id || card.id === flippedCardsClone[1].id } ).map( (card) => { return card.isFlipped = false })
+    }
+    return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter});
+
     default:
     return state;
   }

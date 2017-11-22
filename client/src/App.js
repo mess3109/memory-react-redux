@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
-import Game from './Game';
+import './styles/App.css';
+import Game from './containers/Game';
 
 export default class App extends Component {
   
   render() {
     return (
       <div>
-        <Game store={this.props.store}/>
+        <Game />
      </div>
     );
   }
