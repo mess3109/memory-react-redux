@@ -16,7 +16,7 @@ const Cards = (props) => {
 
 		return (
 		<div className="cards">
-		{cards}
+		{props.loading ? cards : ""}
 		</div>
 		);
 	

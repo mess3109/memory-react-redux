@@ -21,7 +21,7 @@ class Game extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.name(this.props.game.name)
-    this.gameOver()
+    this.props.gameOver(this.state.timer, this.state.name)
   }
 
   handleChange(event) {
@@ -58,14 +58,6 @@ cleanUpInterval = () => {
   clearInterval(this.interval);
 }
 
-gameOver() {
-  const timer = this.state.timer
-  let check = this.props.game.cards.find((card) => {return card.isFlipped === false}  )
-  if (!check) {
-    this.props.gameOver(timer, this.state.name)
-  }
-}
-
 winGame() {
   this.props.game.cards.map((card) => {return card.isFlipped = true})
 }
@@ -78,10 +70,10 @@ render() {
   <div>
   <button onClick={() => this.startGame()}>Start New Game</button>
   <button onClick={() => this.winGame()}>Win Game</button>
-  <p>Turn Count: {this.state.counter}</p>
+  <p>Turn Count: {this.props.game.counter}</p>
   <p>Timer: {this.state.timer}</p>  
   <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/>
-  <Cards cards={game.cards} flipCard={flipCard} />
+  <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
   </div>
   );
 }

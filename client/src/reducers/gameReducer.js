@@ -44,7 +44,7 @@ export default function game(state = initialState, action) {
     case 'START':
     return ({
       gameOver: false,
-      loading: false,
+      loading: true,
       cards: cards,
       flippedCards: [],
       counter: 0,
@@ -54,22 +54,23 @@ export default function game(state = initialState, action) {
     });
 
     case 'FLIP_CARD':
-    let gameOver = false
-    let counter = state.counter
-    let cardsClone = state.cards
-    cardsClone[action.payload].isFlipped = true
-    let flippedCardsClone = state.flippedCards
-    if ((flippedCardsClone.length === 0 || flippedCardsClone[0].id !== action.payload) && flippedCardsClone.length < 2) {
-      flippedCardsClone.push(cardsClone[action.payload])
+    let tempState = Object.assign({},{ counter: state.counter, cards: state.cards, flippedCards: state.flippedCards })
+
+    tempState.cards[action.payload].isFlipped = true
+
+    if ((tempState.flippedCards.length === 0 || tempState.flippedCards[0].id !== action.payload) && tempState.flippedCards.length < 2) {
+      tempState.flippedCards.push(tempState.cards[action.payload])
     }
-    if (flippedCardsClone.length === 2) {
-      counter++
+    if (tempState.flippedCards.length === 2) {
+      tempState.counter++
     } 
-    return Object.assign({}, {cards: cardsClone, flippedCards: flippedCardsClone, counter: counter});
+
+    return Object.assign({}, state, tempState );
 
     case 'CHECK_MATCH_FULFILLED':
-    flippedCardsClone = action.payload[1]
-    cardsClone = action.payload[0]
+    let gameOver = false
+    let flippedCardsClone = action.payload[1]
+    let cardsClone = action.payload[0]
     if (action.payload[1][0].image !== action.payload[1][1].image) {
       cardsClone.filter((card) => { return card.id === flippedCardsClone[0].id || card.id === flippedCardsClone[1].id } ).map( (card) => { return card.isFlipped = false })
     }
@@ -79,10 +80,10 @@ export default function game(state = initialState, action) {
     if (!checkGameOver) {
       gameOver = true
     }
-    return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter, gameOver: gameOver});
+    return Object.assign({}, state, {cards: cardsClone, flippedCards: [], gameOver: gameOver});
 
     case 'END_GAME':
-    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true })
+    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true }, { loading: false })
 
     case 'ADD_NAME':
     return Object.assign({}, state, { name: action.payload });
