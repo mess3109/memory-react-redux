@@ -76,12 +76,6 @@ export default function game(state = initialState, action) {
     }
     return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter});
 
-    case 'GET_SCORES':
-    return Object.assign({}, state, { loading: true }) 
-
-    case 'SHOW_SCORES':
-    return {loading: false, scores: action.payload}
-
     case 'END_GAME':
     return Object.assign({}, state, { gameOver: true })
 

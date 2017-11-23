@@ -3,7 +3,7 @@ import Cards from '../components/Cards.js'
 import Name from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { start, flipCard, checkMatch, gameOver, name } from '../actions/game';
+import { start, flipCard, checkMatch, gameOver, name } from '../actions/gameActions';
 
 class Game extends Component {
 

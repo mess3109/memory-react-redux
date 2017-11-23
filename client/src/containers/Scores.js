@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { scores } from '../actions/game';
+import { scores } from '../actions/scoreActions';
 import Score from '../components/Score.js'
 
 class Scores extends Component {
@@ -12,7 +12,8 @@ class Scores extends Component {
 
   render(){
 
-    const scores = this.props.game.scores.map(score => 
+    const scores = this.props.score.scores.map(score => 
+
       <Score
       key={score.id}
       id={score.id}
@@ -32,7 +33,7 @@ class Scores extends Component {
 
   const mapStateToProps = (state) => {
     return {
-      game: state.game
+      score: state.score
     }
   }
 
