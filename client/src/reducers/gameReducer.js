@@ -24,7 +24,6 @@ const initialState = {
   cards: [],
   flippedCards: [],
   counter: 0,
-  timer: 0,
   scores: [],
   loading: false,
   endGame: false,
@@ -48,7 +47,6 @@ export default function game(state = initialState, action) {
       cards: cards,
       flippedCards: [],
       counter: 0,
-      timer: 0,
       scores: [],
       name: ""
     });

@@ -1,3 +1,3 @@
 class Game < ApplicationRecord
-	validates :name, :timer, presence: true
+	validates :name, :counter, presence: true
 end

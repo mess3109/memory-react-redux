@@ -2,9 +2,9 @@ import React from 'react'
 
 const Score = (props) => {
 
-const { name, timer } = props;
+const { name, counter } = props;
 return (
-		<div>{name}: {timer}</div>
+		<div>{name}: {counter}</div>
 	)
 }
 

@@ -13,7 +13,6 @@ class Game extends Component {
       cards: [],
       flippedCards: [],
       counter: 0,
-      timer: 0,
       name: ""
     }
   }
@@ -21,7 +20,7 @@ class Game extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.name(this.props.game.name)
-    this.props.gameOver(this.state.timer, this.state.name)
+    this.props.gameOver(this.props.game.counter, this.state.name)
   }
 
   handleChange(event) {
@@ -31,7 +30,6 @@ class Game extends Component {
   };
 
   startGame = () => {
-    this.startInterval();
     this.props.start()
   }
 
@@ -42,20 +40,6 @@ class Game extends Component {
  }
 
  componentWillUnmount() {
-  this.cleanUpInterval()
-}
-
-updateTimer = () => {
-  this.setState({
-    timer: this.state.timer + 1})
-}
-
-startInterval = () => {
-  this.interval = setInterval(this.updateTimer, 1000);
-}
-
-cleanUpInterval = () => {
-  clearInterval(this.interval);
 }
 
 winGame() {
@@ -71,7 +55,6 @@ render() {
   <button onClick={() => this.startGame()}>Start New Game</button>
   <button onClick={() => this.winGame()}>Win Game</button>
   <p>Turn Count: {this.props.game.counter}</p>
-  <p>Timer: {this.state.timer}</p>  
   <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/>
   <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
   </div>

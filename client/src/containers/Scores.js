@@ -18,7 +18,7 @@ class Scores extends Component {
       key={score.id}
       id={score.id}
       name={score.name}
-      timer={score.timer}
+      counter={score.counter}
       />
       )
 

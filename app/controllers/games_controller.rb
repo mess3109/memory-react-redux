@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
 	def index
-		@games = Game.all.order(:timer => :desc)
+		@games = Game.all.order(:counter => :desc)
 		render json: @games.to_json
 	end
 
@@ -15,7 +15,7 @@ class GamesController < ApplicationController
 	private
 
 	def game_params
-		params.require(:game).permit(:name, :timer)
+		params.require(:game).permit(:name, :counter)
 	end
 
 end
