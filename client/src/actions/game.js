@@ -28,10 +28,11 @@ export function scores() {
 	}
 };
 
-export function endGame(timer) {
+export function endGame(timer, name) {
   const score = JSON.stringify({
     game: {
-      timer: timer
+      timer: timer,
+      name: name
     }
   });
   return (dispatch) => {
@@ -41,3 +42,10 @@ export function endGame(timer) {
       .then(response => response.json())
   }
 }
+
+export const name = (name) => {
+	return {
+		type: 'ADD_NAME',
+		name
+	};
+};

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 import Game from './containers/Game';
+import Scores from './containers/Scores';
 import NavBar from './components/NavBar';
-import Scores from './components/Scores';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default class App extends Component {

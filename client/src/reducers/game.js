@@ -27,7 +27,8 @@ const initialState = {
   timer: 0,
   scores: [],
   loading: false,
-  endGame: false
+  endGame: false,
+  name: ""
 };
 
 for (i = 0; i < images.length; i++) {
@@ -48,7 +49,8 @@ export default function game(state = initialState, action) {
       flippedCards: [],
       counter: 0,
       timer: 0,
-      scores: []
+      scores: [],
+      name: ""
     });
 
     case 'FLIP_CARD':
@@ -82,6 +84,9 @@ export default function game(state = initialState, action) {
 
     case 'END_GAME':
     return Object.assign({}, state, { endGame: true })
+
+    case 'ADD_NAME':
+    return Object.assign({}, state, { name: action.name });
 
     default:
     return state;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Cards from '../components/Cards.js'
+import Name from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { start, flipCard, checkMatch, endGame } from '../actions/game';
@@ -13,7 +14,8 @@ class Game extends Component {
       cards: [],
       flippedCards: [],
       counter: 0,
-      timer: 0
+      timer: 0,
+      name: ""
     }
   }
 
@@ -49,7 +51,7 @@ gameOver() {
   const timer = this.state.timer
   let check = this.props.game.cards.find((card) => {return card.isFlipped === false}  )
   if (!check) {
-    this.props.endGame(timer)
+    this.props.endGame(timer, this.state.name)
   }
 }
 
@@ -68,6 +70,8 @@ render() {
   <p>Turn Count: {game.counter}</p>
   <p>Timer: {this.state.timer}</p>
   <Cards cards={game.cards} flipCard={flipCard} />
+  <Name store={this.props.store} />
+  {this.state.name}
   </div>
   );
 }
