@@ -14,7 +14,7 @@ function shuffle(array) {
   return array
 }
 
-for (var i = 0; i < 8; i++) {
+for (var i = 0; i < 2; i++) {
   cardsOrig[i] = i + 1
 }
 
@@ -43,7 +43,7 @@ export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
     return ({
-      endGame: false,
+      gameOver: false,
       loading: false,
       cards: cards,
       flippedCards: [],
@@ -54,6 +54,7 @@ export default function game(state = initialState, action) {
     });
 
     case 'FLIP_CARD':
+    let gameOver = false
     let counter = state.counter
     let cardsClone = state.cards
     cardsClone[action.payload].isFlipped = true
@@ -72,10 +73,16 @@ export default function game(state = initialState, action) {
     if (action.payload[1][0].image !== action.payload[1][1].image) {
       cardsClone.filter((card) => { return card.id === flippedCardsClone[0].id || card.id === flippedCardsClone[1].id } ).map( (card) => { return card.isFlipped = false })
     }
-    return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter});
+
+    let checkGameOver = action.payload[0].find((card) => {return card.isFlipped === false} )
+    
+    if (!checkGameOver) {
+      gameOver = true
+    }
+    return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter, gameOver: gameOver});
 
     case 'END_GAME':
-    return Object.assign({}, state, { gameOver: true })
+    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true })
 
     case 'ADD_NAME':
     return Object.assign({}, state, { name: action.payload });

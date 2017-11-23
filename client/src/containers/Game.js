@@ -21,6 +21,7 @@ class Game extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.name(this.props.game.name)
+    this.gameOver()
   }
 
   handleChange(event) {
@@ -46,7 +47,7 @@ class Game extends Component {
 
 updateTimer = () => {
   this.setState({
-    timer: this.state.timer + 1}, () => {this.gameOver()})
+    timer: this.state.timer + 1})
 }
 
 startInterval = () => {
