@@ -36,7 +36,7 @@ class Game extends Component {
 
   componentDidUpdate() {
     if (this.props.game.flippedCards.length === 2) {
-     setTimeout(() => { this.props.checkMatch(this.props.game.flippedCards, this.props.game.cards)},500)
+     this.props.checkMatch(this.props.game.flippedCards, this.props.game.cards)
    }
  }
 

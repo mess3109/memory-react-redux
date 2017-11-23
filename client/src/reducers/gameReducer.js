@@ -66,12 +66,10 @@ export default function game(state = initialState, action) {
     } 
     return Object.assign({}, {cards: cardsClone, flippedCards: flippedCardsClone, counter: counter});
 
-    case 'CHECK_MATCH':
-    flippedCardsClone = action.payload.flippedCards
-    cardsClone = action.payload.cards
-    if (flippedCardsClone[0].image === flippedCardsClone[1].image) {
-      console.log('match!')
-    } else {
+    case 'CHECK_MATCH_FULFILLED':
+    flippedCardsClone = action.payload[1]
+    cardsClone = action.payload[0]
+    if (action.payload[1][0].image !== action.payload[1][1].image) {
       cardsClone.filter((card) => { return card.id === flippedCardsClone[0].id || card.id === flippedCardsClone[1].id } ).map( (card) => { return card.isFlipped = false })
     }
     return Object.assign({}, {cards: cardsClone, flippedCards: [], counter: counter});

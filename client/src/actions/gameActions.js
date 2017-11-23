@@ -14,9 +14,11 @@ export const flipCard = (id) => {
 export const checkMatch = (flippedCards, cards) => {
 	return {
 		type: 'CHECK_MATCH',
-		payload: { cards, flippedCards }
-	};
-};
+		payload: new Promise((resolve,reject) => {
+			setTimeout(() => { resolve([cards, flippedCards])}, 500 )
+		} )
+	}
+}
 
 export function gameOver(timer, name) {
 	const score = JSON.stringify({
