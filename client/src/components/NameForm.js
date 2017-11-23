@@ -4,7 +4,7 @@ const Name = (props) => {
 
 	return (
 		<div className="nameForm">
-		{props.endGame ?
+		{props.gameOver ?
 			<form onSubmit={props.handleSubmit}>
 			<label>Name</label>
 			<input type="text" onChange={props.handleChange}/>

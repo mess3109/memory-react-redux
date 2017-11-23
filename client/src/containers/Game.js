@@ -61,7 +61,7 @@ gameOver() {
   const timer = this.state.timer
   let check = this.props.game.cards.find((card) => {return card.isFlipped === false}  )
   if (!check) {
-    this.props.endGame(timer, this.state.name)
+    this.props.gameOver(timer, this.state.name)
   }
 }
 
@@ -79,7 +79,7 @@ render() {
   <button onClick={() => this.winGame()}>Win Game</button>
   <p>Turn Count: {this.state.counter}</p>
   <p>Timer: {this.state.timer}</p>  
-  <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} endGame={this.props.game.endGame}/>
+  <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/>
   <Cards cards={game.cards} flipCard={flipCard} />
   </div>
   );
