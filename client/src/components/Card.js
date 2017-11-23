@@ -4,6 +4,7 @@ import '../styles/Card.css'
 const Card = (props) => {
 
 const { image } = props;
+
 return (
 	<div className="card" onClick={() => props.flipCard(props.id)} >
 	{props.isFlipped ?
