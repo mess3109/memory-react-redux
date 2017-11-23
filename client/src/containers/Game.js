@@ -3,14 +3,13 @@ import Cards from '../components/Cards.js'
 import Name from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { start, flipCard, checkMatch, endGame, name } from '../actions/game';
+import { start, flipCard, checkMatch, gameOver, name } from '../actions/game';
 
 class Game extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      loading: false, 
       cards: [],
       flippedCards: [],
       counter: 0,
@@ -79,9 +78,9 @@ render() {
   <button onClick={() => this.startGame()}>Start New Game</button>
   <button onClick={() => this.winGame()}>Win Game</button>
   <p>Turn Count: {this.state.counter}</p>
-  <p>Timer: {this.state.timer}</p>
+  <p>Timer: {this.state.timer}</p>  
+  <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} endGame={this.props.game.endGame}/>
   <Cards cards={game.cards} flipCard={flipCard} />
-  <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this) }/>
   </div>
   );
 }
@@ -97,7 +96,7 @@ const mapDispatchToProps = (dispatch) => {
     start: start,
     flipCard: flipCard,
     checkMatch: checkMatch,
-    endGame: endGame,
+    gameOver: gameOver,
     name: name
   }, dispatch)
 };

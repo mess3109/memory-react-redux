@@ -28,7 +28,7 @@ export function scores() {
 	}
 };
 
-export function endGame(timer, name) {
+export function gameOver(timer, name) {
   const score = JSON.stringify({
     game: {
       timer: timer,

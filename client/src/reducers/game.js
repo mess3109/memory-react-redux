@@ -83,7 +83,7 @@ export default function game(state = initialState, action) {
     return {loading: false, scores: action.payload}
 
     case 'END_GAME':
-    return Object.assign({}, state, { endGame: true })
+    return Object.assign({}, state, { gameOver: true })
 
     case 'ADD_NAME':
     return Object.assign({}, state, { name: action.name });
