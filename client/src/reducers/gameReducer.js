@@ -1,4 +1,3 @@
-// let cardsOrig = []
 let cards = []
 
 function shuffle(array) {

@@ -18,7 +18,4 @@
 !/tmp/.keep
 
 .byebug_history
-/client/src/images.js
-/client/src/containers/Images.js
-/client/src/actions/imageActions.js
 .env
