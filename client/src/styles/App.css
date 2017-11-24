@@ -28,3 +28,14 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.footer {
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  padding: 5px;
+  bottom: 0px;
+  position: absolute;
+  left: 0px;
+  margin: 0;
+}

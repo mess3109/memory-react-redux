@@ -58,6 +58,7 @@ class Game extends Component {
     Turn Count: {this.props.game.counter}
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
     <p><Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
+    <div className="footer">This application uses the <a href="developers.artsy.net">Artsy API</a> but is not endorsed or certified by Artsy.  This application features images from the <a href="developers.artsy.net">Artsy API</a>.</div>
     </div>
     );
  }
