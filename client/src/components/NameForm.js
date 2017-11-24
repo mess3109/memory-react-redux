@@ -6,8 +6,7 @@ const Name = (props) => {
 		<div className="nameForm">
 		{props.gameOver ?
 			<form onSubmit={props.handleSubmit}>
-			<label>Name</label>
-			<input type="text" onChange={props.handleChange}/>
+			<input type="text" onChange={props.handleChange} placeholder="name"/>
 			<input type="submit"/>
 			</form> : ""
 		}

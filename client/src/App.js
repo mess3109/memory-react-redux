@@ -3,6 +3,7 @@ import './styles/App.css';
 import Game from './containers/Game';
 import Scores from './containers/Scores';
 import NavBar from './components/NavBar';
+import Images from './containers/Images';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default class App extends Component {
@@ -14,6 +15,7 @@ export default class App extends Component {
 			<NavBar />
 			<Route exact path="/" component={Game} className="Game"/>
 			<Route exact path="/scores" component={Scores} />
+			<Route exact path="/images" component={Images} />
 			</div>
 			</Router>
 			);

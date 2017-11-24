@@ -18,6 +18,6 @@
 !/tmp/.keep
 
 .byebug_history
-/client/src/food-App.js
-/client/src/food-Client.js
 /client/src/images.js
+/client/src/containers/Images.js
+/client/src/actions/imageActions.js

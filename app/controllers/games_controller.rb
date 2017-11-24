@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
 	def index
-		@games = Game.all.order(:counter => :desc)
+		@games = Game.all.order(:counter => :asc)
 		render json: @games.to_json
 	end
 

@@ -42,21 +42,15 @@ class Game extends Component {
  componentWillUnmount() {
 }
 
-winGame() {
-  this.props.game.cards.map((card) => {return card.isFlipped = true})
-}
-
-
 render() {
  const { game, flipCard } = this.props;
 
  return (
   <div>
-  <button onClick={() => this.startGame()}>Start New Game</button>
-  <button onClick={() => this.winGame()}>Win Game</button>
-  <p>Turn Count: {this.props.game.counter}</p>
-  <Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/>
+  <p><button onClick={() => this.startGame()}>Start New Game</button></p>
+  Turn Count: {this.props.game.counter}
   <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
+  <p><Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
   </div>
   );
 }
