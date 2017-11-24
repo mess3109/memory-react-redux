@@ -19,6 +19,7 @@ class Scores extends Component {
       id={score.id}
       name={score.name}
       counter={score.counter}
+      time={score.created_at}
       />
       )
 

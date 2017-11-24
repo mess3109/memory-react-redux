@@ -14,7 +14,7 @@ function shuffle(array) {
   return array
 }
 
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 10; i++) {
   cardsOrig[i] = i + 1
 }
 

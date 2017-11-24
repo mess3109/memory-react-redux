@@ -15,11 +15,13 @@ const Cards = (props) => {
 		)
 
 		return (
-		<div className="cards">
-		{props.loading ? cards : ""}
+		<div className="cardsContainer">
+			<div className="cards">
+			{props.loading ? cards : ""}
+			</div>
 		</div>
 		);
-	
-}
 
-export default Cards;
+	}
+
+	export default Cards;
