@@ -8,9 +8,9 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  /*cursor: pointer;*/
+  cursor: pointer;
   border-radius: 5px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .card-up {

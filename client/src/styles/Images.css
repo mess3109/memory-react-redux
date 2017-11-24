@@ -1,0 +1,11 @@
+.images {
+	text-align: left;
+}
+
+.images ul {
+	list-style: none;
+}
+
+.image-block {
+	padding: 10px;
+}

@@ -37,7 +37,6 @@ class Game extends Component {
   }
 
   startGame = () => {
-    console.log(this.props.image.images)
     this.props.start(this.props.image.images)
   }
 
