@@ -1,4 +1,4 @@
-let cardsOrig = []
+// let cardsOrig = []
 let cards = []
 
 function shuffle(array) {
@@ -14,42 +14,30 @@ function shuffle(array) {
   return array
 }
 
-for (var i = 0; i < 10; i++) {
-  cardsOrig[i] = i + 1
-}
-
-let images = shuffle(cardsOrig.concat(cardsOrig))
-
 const initialState = {
-  cards: [],
+  gameOver: false,
+  loading: true,
+  cards: cards,
   flippedCards: [],
   counter: 0,
   scores: [],
-  loading: false,
-  endGame: false,
   name: ""
 };
-
-for (i = 0; i < images.length; i++) {
-  cards[i] = {
-    id: i, 
-    image: images[i],
-    isFlipped: false
-  }
-}
 
 export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
-    return ({
-      gameOver: false,
-      loading: true,
-      cards: cards,
-      flippedCards: [],
-      counter: 0,
-      scores: [],
-      name: ""
-    });
+    let cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+    let images = shuffle(cardsOrig.concat(cardsOrig))
+
+    for (let i = 0; i < images.length; i++) {
+      cards[i] = {
+        id: i, 
+        image: images[i],
+        isFlipped: false
+      }
+    }
+    return Object.assign({}, initialState, { cards: cards });
 
     case 'FLIP_CARD':
     let tempState = Object.assign({},{ counter: state.counter, cards: state.cards, flippedCards: state.flippedCards })

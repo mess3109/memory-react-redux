@@ -4,6 +4,7 @@ import Name from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { start, flipCard, checkMatch, gameOver, name } from '../actions/gameActions';
+import { fetchImages } from '../actions/imageActions';
 
 class Game extends Component {
 
@@ -29,8 +30,15 @@ class Game extends Component {
     });
   };
 
+  componentWillMount() {
+    this.props.fetchImages('https://api.artsy.net/api/artworks');
+    this.props.fetchImages('https://api.artsy.net/api/artworks?cursor=4d8b93b04eb68a1b2c001b9d%3A4d8b93b04eb68a1b2c001b9d');
+
+  }
+
   startGame = () => {
-    this.props.start()
+    console.log(this.props.image.images)
+    this.props.start(this.props.image.images)
   }
 
   componentDidUpdate() {
@@ -40,24 +48,25 @@ class Game extends Component {
  }
 
  componentWillUnmount() {
-}
+ }
 
-render() {
- const { game, flipCard } = this.props;
+ render() {
+   const { game, flipCard } = this.props;
 
- return (
-  <div>
-  <p><button onClick={() => this.startGame()}>Start New Game</button></p>
-  Turn Count: {this.props.game.counter}
-  <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
-  <p><Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
-  </div>
-  );
-}
+   return (
+    <div>
+    <p><button onClick={() => this.startGame()}>Start New Game</button></p>
+    Turn Count: {this.props.game.counter}
+    <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
+    <p><Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
+    </div>
+    );
+ }
 }
 
 const mapStateToProps = (state) => ({ 
-  game: state.game
+  game: state.game,
+  image: state.image
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -67,7 +76,8 @@ const mapDispatchToProps = (dispatch) => {
     flipCard: flipCard,
     checkMatch: checkMatch,
     gameOver: gameOver,
-    name: name
+    name: name,
+    fetchImages: fetchImages
   }, dispatch)
 };
 

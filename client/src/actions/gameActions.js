@@ -1,6 +1,7 @@
-export const start = () => {
+export const start = (images) => {
 	return {
-		type: 'START'
+		type: 'START',
+		payload: images
 	};
 };
 
