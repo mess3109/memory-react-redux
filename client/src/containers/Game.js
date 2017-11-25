@@ -22,7 +22,7 @@ class Game extends Component {
     event.preventDefault();
     this.props.name(this.props.game.name)
     this.props.gameOver(this.props.game.counter, this.state.name)
-    window.location.href = "/scores"
+    this.setState({ name: "" })
   }
 
   handleChange(event) {
@@ -33,7 +33,6 @@ class Game extends Component {
 
   componentWillMount() {
     this.props.fetchImages('https://api.artsy.net/api/artworks?similar_to_artwork_id=516ca69f078b3214780007a9');
-
   }
 
   startGame = () => {
@@ -53,11 +52,11 @@ class Game extends Component {
    const { game, flipCard } = this.props;
 
    return (
-    <div>
-    <p><button onClick={() => this.startGame()}>Start New Game</button></p>
-    Turn Count: {this.props.game.counter}
+    <div className="game">
+    <div><button onClick={() => this.startGame()}>Start New Game</button></div>
+    <div className="turn-count">Turn Count: {this.props.game.counter}</div>
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
-    <p><Name handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
+    <Name handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver} name={this.state.name}/>
     </div>
     );
  }

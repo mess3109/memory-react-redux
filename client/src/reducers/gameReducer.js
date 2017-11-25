@@ -69,7 +69,7 @@ export default function game(state = initialState, action) {
     return Object.assign({}, state, {cards: cardsClone, flippedCards: [], gameOver: gameOver});
 
     case 'END_GAME':
-    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true }, { loading: false }, { name: ""} )
+    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true }, { loading: false } )
 
     case 'ADD_NAME':
     return Object.assign({}, state, { name: action.payload });

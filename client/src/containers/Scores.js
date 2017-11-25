@@ -26,7 +26,7 @@ class Scores extends Component {
 
       return (
       <div className="scores">
-      <p>{scores}</p>
+      {scores}
       </div>
       );
     }

@@ -31,4 +31,15 @@
 
 .scores {
   min-height:550px;
+  padding: 5px;
+}
+
+.game {
+  padding: 5px;
+}
+
+.turn-count {
+  padding: 0px;
+  margin-bottom: 0px;
+  margin-top: 5px;
 }
