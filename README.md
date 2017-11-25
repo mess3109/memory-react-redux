@@ -1,24 +1,12 @@
-# README
+# Memory Game with Classic Art
+This is the classic memory card game built with [React](https://reactjs.org/) and [Redux](https://redux.js.org/Redux).  The images on the cards come from the [Artsy API](https://developers.artsy.net).
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
+Fork and clone the repository.  Then run `bundle install`, `npm install`, and `rake start`.
 
-Things you may want to cover:
+## Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/mess3109/memory-react-redux. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org)
+code of conduct.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+This application is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

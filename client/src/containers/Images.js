@@ -8,11 +8,7 @@ import '../styles/Images.css'
 
 class Images extends Component {
 
-
-
   componentWillMount() {
-    const URL = process.env.REACT_APP_URL
-    console.log(`${URL}`)
     this.props.fetchImages('https://api.artsy.net/api/artworks?similar_to_artwork_id=516ca69f078b3214780007a9')
   }
 

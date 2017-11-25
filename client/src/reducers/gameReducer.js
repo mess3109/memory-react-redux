@@ -64,6 +64,7 @@ export default function game(state = initialState, action) {
     
     if (!checkGameOver) {
       gameOver = true
+      alert('You won!!  Enter your name below.')
     }
     return Object.assign({}, state, {cards: cardsClone, flippedCards: [], gameOver: gameOver});
 
