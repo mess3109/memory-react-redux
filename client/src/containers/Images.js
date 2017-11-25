@@ -5,11 +5,15 @@ import { fetchImages, afterToken } from '../actions/imageActions';
 import Image from '../components/Image.js'
 import '../styles/Images.css'
 
+
 class Images extends Component {
 
+
+
   componentWillMount() {
-    this.props.fetchImages('https://api.artsy.net/api/artworks');
-    this.props.fetchImages('https://api.artsy.net/api/artworks?cursor=4d8b93b04eb68a1b2c001b9d%3A4d8b93b04eb68a1b2c001b9d');
+    const URL = process.env.REACT_APP_URL
+    console.log(`${URL}`)
+    this.props.fetchImages('https://api.artsy.net/api/artworks?similar_to_artwork_id=516ca69f078b3214780007a9')
   }
 
   render() {
@@ -29,6 +33,8 @@ class Images extends Component {
         <ul>
           {images}
         </ul>
+        <div className="footer">This application uses the <a href="developers.artsy.net">Artsy API</a> but is not endorsed or certified by Artsy.  This application features images from the <a href="developers.artsy.net">Artsy API</a>.</div>
+ 
       </div>
       );
     }

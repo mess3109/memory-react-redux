@@ -31,8 +31,7 @@ class Game extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchImages('https://api.artsy.net/api/artworks');
-    this.props.fetchImages('https://api.artsy.net/api/artworks?cursor=4d8b93b04eb68a1b2c001b9d%3A4d8b93b04eb68a1b2c001b9d');
+    this.props.fetchImages('https://api.artsy.net/api/artworks?similar_to_artwork_id=516ca69f078b3214780007a9');
 
   }
 

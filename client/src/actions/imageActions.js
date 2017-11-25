@@ -1,5 +1,6 @@
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
+const API_URL = process.env.REACT_APP_URL;
 
 export const fetchImages = (url) => {
 	return dispatch => {
