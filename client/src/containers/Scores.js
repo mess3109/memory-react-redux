@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { scores } from '../actions/scoreActions';
-import Score from '../components/Score.js'
+import Score from '../components/Score'
+
 
 class Scores extends Component {
 

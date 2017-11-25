@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from './Card.js'
+import Card from './Card'
 import '../styles/Cards.css'
 
 const Cards = (props) => {
@@ -17,7 +17,7 @@ const Cards = (props) => {
 		return (
 		<div className="cardsContainer">
 			<div className="cards">
-			{props.loading ? cards : ""}
+			{cards}
 			</div>
 		</div>
 		);

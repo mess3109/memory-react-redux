@@ -64,12 +64,12 @@ export default function game(state = initialState, action) {
     
     if (!checkGameOver) {
       gameOver = true
-      alert('You won!!  Enter your name below.')
+      alert('You finished!!  Enter your name below.')
     }
     return Object.assign({}, state, {cards: cardsClone, flippedCards: [], gameOver: gameOver});
 
     case 'END_GAME':
-    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true }, { loading: false })
+    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true }, { loading: false }, { name: ""} )
 
     case 'ADD_NAME':
     return Object.assign({}, state, { name: action.payload });

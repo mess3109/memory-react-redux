@@ -29,18 +29,6 @@
   to { transform: rotate(360deg); }
 }
 
-.footer {
-  width: 100%;
-  text-align: left;
-  font-size: 12px;
-  padding: 5px;
-  bottom: 0px;
-  position: relative;
-  left: 0px;
-  margin: 0;
-}
-
-.footer a {
-  color: gray;
-  text-decoration: underline;
+.scores {
+  min-height:550px;
 }

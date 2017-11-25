@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchImages, afterToken } from '../actions/imageActions';
-import Image from '../components/Image.js'
+import Image from '../components/Image'
 import '../styles/Images.css'
 
 
@@ -29,8 +29,6 @@ class Images extends Component {
         <ul>
           {images}
         </ul>
-        <div className="footer">This application uses the <a href="developers.artsy.net">Artsy API</a> but is not endorsed or certified by Artsy.  This application features images from the <a href="developers.artsy.net">Artsy API</a>.</div>
- 
       </div>
       );
     }
