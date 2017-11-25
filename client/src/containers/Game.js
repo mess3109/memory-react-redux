@@ -22,6 +22,7 @@ class Game extends Component {
     event.preventDefault();
     this.props.name(this.props.game.name)
     this.props.gameOver(this.props.game.counter, this.state.name)
+    window.location.href = "/scores"
   }
 
   handleChange(event) {
@@ -56,7 +57,7 @@ class Game extends Component {
     <p><button onClick={() => this.startGame()}>Start New Game</button></p>
     Turn Count: {this.props.game.counter}
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
-    <p><Name store={this.props.store} handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
+    <p><Name handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver}/></p>
     </div>
     );
  }
