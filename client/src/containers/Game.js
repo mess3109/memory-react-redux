@@ -41,7 +41,7 @@ class Game extends Component {
 
   componentDidUpdate() {
     if (this.props.game.flippedCards.length === 2) {
-     this.props.checkMatch(this.props.game.flippedCards, this.props.game.cards)
+    this.props.checkMatch()
    }
  }
 

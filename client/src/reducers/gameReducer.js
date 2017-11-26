@@ -27,9 +27,9 @@ export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
     let cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+    cardsOrig = cardsOrig.slice(0,10)
     // test on only two cards
     // cardsOrig = cardsOrig.slice(0,2)
-    cardsOrig = cardsOrig.slice(0,10)
     let images = shuffle(cardsOrig.concat(cardsOrig))
 
     for (let i = 0; i < images.length; i++) {
@@ -39,7 +39,7 @@ export default function game(state = initialState, action) {
         isFlipped: false
       }
     }
-    return Object.assign({}, initialState, { cards: cards });
+    return Object.assign({}, state, { cards: cards });
 
     case 'FLIP_CARD':
     let tempState = Object.assign({},{ counter: state.counter, cards: state.cards, flippedCards: state.flippedCards })
@@ -56,23 +56,24 @@ export default function game(state = initialState, action) {
     return Object.assign({}, state, tempState );
 
     case 'CHECK_MATCH_FULFILLED':
-    let gameOver = false
-    let flippedCardsClone = action.payload[1]
-    let cardsClone = action.payload[0]
-    if (action.payload[1][0].image !== action.payload[1][1].image) {
-      cardsClone.filter((card) => { return card.id === flippedCardsClone[0].id || card.id === flippedCardsClone[1].id } ).map( (card) => { return card.isFlipped = false })
+    let gameOver
+    tempState = Object.assign({}, { cards: state.cards })
+
+    if (state.flippedCards[0].image !== state.flippedCards[1].image) {
+      tempState.cards.filter((card) => { return card.id === state.flippedCards[0].id || card.id === state.flippedCards[1].id } ).map( (card) => { return card.isFlipped = false })
     }
 
-    let checkGameOver = action.payload[0].find((card) => {return card.isFlipped === false} )
-    
+    let checkGameOver = tempState.cards.find((card) => {return card.isFlipped === false} )
+
     if (!checkGameOver) {
-      gameOver = true
+      gameOver = !state.gameOver
       alert(`Finished in ${state.counter} rounds!! Add your name to the list of high scores!`)
     }
-    return Object.assign({}, state, {cards: cardsClone, flippedCards: [], gameOver: gameOver});
+    
+    return Object.assign({}, state, tempState, { flippedCards: [], gameOver: gameOver});
 
     case 'END_GAME':
-    return Object.assign({}, state, { flippedCards: [] }, { gameOver: true }, { loading: false } )
+    return Object.assign({}, state, { loading: false } )
 
     case 'ADD_NAME':
     return Object.assign({}, state, { name: action.payload });

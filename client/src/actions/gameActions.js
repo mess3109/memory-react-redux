@@ -12,11 +12,11 @@ export const flipCard = (id) => {
 	};
 };
 
-export const checkMatch = (flippedCards, cards) => {
+export const checkMatch = () => {
 	return {
 		type: 'CHECK_MATCH',
 		payload: new Promise((resolve,reject) => {
-			setTimeout(() => { resolve([cards, flippedCards])}, 500 )
+			setTimeout(() => { resolve() }, 500 )
 		} )
 	}
 }
@@ -33,6 +33,7 @@ export const gameOver = (counter, name) => {
 		return fetch('/api/games', {
 			method: "post", body: score, headers: { "Content-Type": "application/json" }})
 		.then(response => response.json())
+		// .then(window.location.href = "/scores")
 	}
 }
 
