@@ -21,7 +21,7 @@ export const checkMatch = (flippedCards, cards) => {
 	}
 }
 
-export function gameOver(counter, name) {
+export const gameOver = (counter, name) => {
 	const score = JSON.stringify({
 		game: {
 			counter: counter,

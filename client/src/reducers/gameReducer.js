@@ -27,6 +27,8 @@ export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
     let cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+    // test on only two cards
+    // cardsOrig = cardsOrig.slice(0,2)
     let images = shuffle(cardsOrig.concat(cardsOrig))
 
     for (let i = 0; i < images.length; i++) {
@@ -64,7 +66,7 @@ export default function game(state = initialState, action) {
     
     if (!checkGameOver) {
       gameOver = true
-      alert('You finished!!  Enter your name below.')
+      alert(`Finished in ${state.counter} rounds!! Add your name to the list of high scores!`)
     }
     return Object.assign({}, state, {cards: cardsClone, flippedCards: [], gameOver: gameOver});
 

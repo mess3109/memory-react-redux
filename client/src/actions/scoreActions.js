@@ -1,4 +1,4 @@
-export function scores() {
+export const scores = () => {
 	return (dispatch) => {
 		dispatch({ type: 'GET_SCORES' })
 		return fetch('/api/games')

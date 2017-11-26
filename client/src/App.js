@@ -14,7 +14,7 @@ export default class App extends Component {
 			<Router>
 			<div>
 			<NavBar />
-			<Route exact path="/" component={Game} className="Game"/>
+			<Route exact path="/" component={Game} />
 			<Route exact path="/scores" component={Scores} />
 			<Route exact path="/images" component={Images} />
 			<hr/>

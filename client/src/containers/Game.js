@@ -50,13 +50,17 @@ class Game extends Component {
 
  render() {
    const { game, flipCard } = this.props;
+   let form = ""
+   if (this.props.game.gameOver) {
+    form = <Name handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver} name={this.state.name}/>
+    }
 
    return (
     <div className="game">
     <div><button onClick={() => this.startGame()}>Start New Game</button></div>
-    <div className="turn-count">Turn Count: {this.props.game.counter}</div>
+    <div className="turn-count">Round: {this.props.game.counter}</div>
+    {form}
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
-    <Name handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver} name={this.state.name}/>
     </div>
     );
  }
