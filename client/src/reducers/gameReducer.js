@@ -39,7 +39,7 @@ export default function game(state = initialState, action) {
         isFlipped: false
       }
     }
-    return Object.assign({}, state, { cards: cards });
+    return Object.assign({}, initialState, { cards: cards });
 
     case 'FLIP_CARD':
     let tempState = Object.assign({},{ counter: state.counter, cards: state.cards, flippedCards: state.flippedCards })
