@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchImages, afterToken } from '../actions/imageActions';
 import Image from '../components/Image'
 import '../styles/Images.css'
 
 
 class Images extends Component {
-
-  componentWillMount() {
-    this.props.fetchImages('https://api.artsy.net/api/artworks?similar_to_artwork_id=516ca69f078b3214780007a9')
-  }
 
   render() {
 
@@ -40,11 +34,5 @@ class Images extends Component {
     }
   }
 
-  const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({  
-      fetchImages: fetchImages,
-      afterToken: afterToken
-    }, dispatch)};
-
-    export default connect(mapStateToProps, mapDispatchToProps)(Images);
+ export default connect(mapStateToProps)(Images);
 
