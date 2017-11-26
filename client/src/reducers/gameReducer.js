@@ -73,10 +73,7 @@ export default function game(state = initialState, action) {
     return Object.assign({}, state, tempState, { flippedCards: [], gameOver: gameOver});
 
     case 'END_GAME':
-    return Object.assign({}, state, { loading: false } )
-
-    case 'ADD_NAME':
-    return Object.assign({}, state, { name: action.payload });
+    return Object.assign({}, state, { gameOver: false } )
 
     default:
     return state;

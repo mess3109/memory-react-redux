@@ -3,7 +3,7 @@ import Cards from '../components/Cards'
 import Name from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { start, flipCard, checkMatch, gameOver, name } from '../actions/gameActions';
+import { start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
 import { fetchImages } from '../actions/imageActions';
 
 class Game extends Component {
@@ -20,7 +20,6 @@ class Game extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.name(this.props.game.name)
     this.props.gameOver(this.props.game.counter, this.state.name)
     this.setState({ name: "" })
   }
@@ -78,7 +77,6 @@ const mapDispatchToProps = (dispatch) => {
     flipCard: flipCard,
     checkMatch: checkMatch,
     gameOver: gameOver,
-    name: name,
     fetchImages: fetchImages
   }, dispatch)
 };

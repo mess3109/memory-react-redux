@@ -33,7 +33,6 @@ export const gameOver = (counter, name) => {
 		return fetch('/api/games', {
 			method: "post", body: score, headers: { "Content-Type": "application/json" }})
 		.then(response => response.json())
-		// .then(window.location.href = "/scores")
 	}
 }
 
