@@ -1,5 +1,8 @@
 {
   "name": "client",
+  "engines": {
+    "node": "6.11.2"
+  }
   "version": "0.1.0",
   "private": true,
   "homepage" : "http://mess3109.github.io/memory-react-redux",
