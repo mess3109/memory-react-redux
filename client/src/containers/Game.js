@@ -20,8 +20,9 @@ class Game extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.gameOver(this.props.game.counter, this.state.name)
+    this.props.gameOver(this.props.game.counter, this.state.name, this.props.history)
     this.setState({ name: "" })
+
   }
 
   handleChange(event) {

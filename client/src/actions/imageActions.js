@@ -12,7 +12,7 @@ export const fetchImages = (url) => {
 
 export const afterToken = (url, data) => {
 	return dispatch => {
-		return fetch(url, {
+		return fetch(API_URL, {
 			headers: {
 				'X-Xapp-Token': data.token,
 				'Accept': 'application/vnd.artsy-v2+json'

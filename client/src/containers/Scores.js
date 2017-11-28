@@ -7,8 +7,22 @@ import Score from '../components/Score'
 
 class Scores extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      likeCounter: 0
+      }
+  }
+
   componentWillMount() {
     this.props.scores();
+  }
+
+  clickMe() {
+    console.log(this)
+    this.setState({
+      likeCounter: this.state.likeCounter + 1
+    }) 
   }
 
   render(){
@@ -21,6 +35,8 @@ class Scores extends Component {
       name={score.name}
       counter={score.counter}
       time={score.created_at}
+      clickMe={this.clickMe.bind(this)}
+      likeCounter={this.state.likeCounter}
       />
       )
 
