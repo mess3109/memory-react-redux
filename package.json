@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://mess3109.github.io/memory-react-redux",
   "dependencies": {
     "dotenv": "^4.0.0",
     "react": "^16.1.0",
@@ -19,7 +20,7 @@
     "eject": "react-scripts eject",
     "build": "cd client && yarn install && yarn build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+    "postinstall": "cd client && npm install"
   },
   "proxy": "http://localhost:3001/"
 }
