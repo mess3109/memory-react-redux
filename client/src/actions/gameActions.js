@@ -29,10 +29,10 @@ export const gameOver = (counter, name) => {
 		}
 	});
 	return (dispatch) => {
-		dispatch({ type: 'END_GAME' })
 		return fetch('/api/games', {
 			method: "post", body: score, headers: { "Content-Type": "application/json" }})
 		.then(response => response.json())
+		.then(dispatch({ type: 'END_GAME' }))
 	}
 }
 

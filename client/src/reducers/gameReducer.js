@@ -29,7 +29,7 @@ export default function game(state = initialState, action) {
     let cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
     cardsOrig = cardsOrig.slice(0,10)
     // test on only two cards
-    // cardsOrig = cardsOrig.slice(0,2)
+    cardsOrig = cardsOrig.slice(0,2)
     let images = shuffle(cardsOrig.concat(cardsOrig))
 
     for (let i = 0; i < images.length; i++) {
