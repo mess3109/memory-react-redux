@@ -32,10 +32,10 @@ export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
 
-    if (action.payload[0].length > 0) {
-      cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+    if (action.payload[0].id.length > 0) {
+      cardsOrig = action.payload.map(image => image._links.thumbnail.href )
     } else {
-      cardsOrig = backupImages.map((element) => element)
+      cardsOrig = backupImages
     }
 
     cardsOrig = cardsOrig.slice(0,10)
