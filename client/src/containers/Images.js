@@ -8,7 +8,7 @@ class Images extends Component {
 
   render() {
 
-    const images = this.props.image.images.map((image, index) => 
+    const images = this.props.image.images.filter((artwork) => {return typeof artwork._links.thumbnail === "object"}).map((image, index) => 
       <Image image={image._links.thumbnail.href} 
         key={index}
         title={image.title}

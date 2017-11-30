@@ -31,14 +31,20 @@ let cardsOrig = []
 export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
-
-    if (action.payload[0]._links.thumbnail) {
+    action.payload = action.payload.filter((artwork) => {return typeof artwork._links.thumbnail === "object"})
+    if (action.payload.length > 0) {
       cardsOrig = action.payload.map(image => image._links.thumbnail.href )
+      while(cardsOrig.length < 10) {
+        let num = Math.floor(Math.random() * backupImages.length)
+        if (!cardsOrig.find(image => image === backupImages[num])) {
+          cardsOrig.push(backupImages[num])
+        }
+      }
+      // cardsOrig = cardsOrig.slice(0,2 * Math.floor(cardsOrig.length/2))
     } else {
       cardsOrig = backupImages
     }
 
-    cardsOrig = cardsOrig.slice(0,10)
     // test on only two cards
     // cardsOrig = cardsOrig.slice(0,2)
     let images = shuffle(cardsOrig.concat(cardsOrig))
