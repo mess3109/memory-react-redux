@@ -36,7 +36,7 @@ export default function game(state = initialState, action) {
     // if (!action.payload[0]) {
     //   cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
     // } else {
-      // cardsOrig = backupImages.map((element) => element)
+    cardsOrig = backupImages.map((element) => element)
     // }
 
     cardsOrig = cardsOrig.slice(0,10)
