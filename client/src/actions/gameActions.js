@@ -16,7 +16,7 @@ export const checkMatch = () => {
 	return {
 		type: 'CHECK_MATCH',
 		payload: new Promise((resolve,reject) => {
-			setTimeout(() => { resolve() }, 500 )
+			setTimeout(() => { resolve() }, 1000 )
 		} )
 	}
 }

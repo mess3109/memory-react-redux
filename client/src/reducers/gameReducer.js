@@ -20,13 +20,20 @@ const initialState = {
   flippedCards: [],
   counter: 0,
   scores: [],
-  name: ""
+  name: "",
+  disableClick: false
 };
+
+// for (var i = 0; i < 10; i++) {
+//   cardsOrig[i] = i + 1
+// }
 
 export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
+
     let cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+
     cardsOrig = cardsOrig.slice(0,10)
     // test on only two cards
     // cardsOrig = cardsOrig.slice(0,2)
@@ -39,10 +46,11 @@ export default function game(state = initialState, action) {
         isFlipped: false
       }
     }
+
     return Object.assign({}, initialState, { cards: cards });
 
     case 'FLIP_CARD':
-    let tempState = Object.assign({},{ counter: state.counter, cards: state.cards, flippedCards: state.flippedCards })
+    let tempState = Object.assign({},{ counter: state.counter, cards: state.cards, flippedCards: state.flippedCards, disableClick: state.disableClick })
 
     tempState.cards[action.payload].isFlipped = true
 
@@ -51,6 +59,7 @@ export default function game(state = initialState, action) {
     }
     if (tempState.flippedCards.length === 2) {
       tempState.counter++
+      tempState.disableClick = true
     } 
 
     return Object.assign({}, state, tempState );
@@ -70,7 +79,7 @@ export default function game(state = initialState, action) {
       alert(`Finished in ${state.counter} rounds!! Add your name to the list of high scores!`)
     }
     
-    return Object.assign({}, state, tempState, { flippedCards: [], gameOver: gameOver});
+    return Object.assign({}, state, tempState, { flippedCards: [], gameOver: gameOver, disableClick: false });
 
     case 'END_GAME':
     return Object.assign({}, state, { gameOver: false } )

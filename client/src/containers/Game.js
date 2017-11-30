@@ -14,7 +14,8 @@ class Game extends Component {
       cards: [],
       flippedCards: [],
       counter: 0,
-      name: ""
+      name: "",
+      disableClick: false
     }
   }
 
@@ -59,7 +60,7 @@ class Game extends Component {
     <div><button onClick={() => this.startGame()}>Start New Game</button></div>
     <div className="turn-count">Round: {this.props.game.counter}</div>
     {form}
-    <Cards cards={game.cards} flipCard={flipCard} loading={game.loading}/>
+    <Cards cards={game.cards} flipCard={flipCard} loading={game.loading} disableClick={game.disableClick}/>
     </div>
     );
  }
