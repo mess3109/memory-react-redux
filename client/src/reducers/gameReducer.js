@@ -1,4 +1,6 @@
 let cards = []
+let backupImages = ['https://d32dm0rphc51dk.cloudfront.net/sLk9dUSR9rK8VHKj8XwmiA/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/nYda7YCiY06VYGVRvfgc4A/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/YlIcfcosMKSItnQxsXpW6w/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/JFRJIoA26Ccsb1WFCNfvuw/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/tAEiY881HVs_33crt6Swng/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/mdk-UfAfmfx3axsi9IGBcg/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/ldMX40edBZskPD-KF9015w/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/i4Dkd3mp60XpKwoplsEUGA/medium.jpg', 'https://d32dm0rphc51dk.cloudfront.net/i4Dkd3mp60XpKwoplsEUGA/medium.jpg','https://d32dm0rphc51dk.cloudfront.net/z2fgbNgHsEsrUTe0dR4g6g/medium.jpg']
+
 
 function shuffle(array) {
   let temp = null
@@ -24,15 +26,18 @@ const initialState = {
   disableClick: false
 };
 
-// for (var i = 0; i < 10; i++) {
-//   cardsOrig[i] = i + 1
-// }
+let cardsOrig = []
 
 export default function game(state = initialState, action) {
   switch(action.type) {
     case 'START':
 
-    let cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+    
+    if (!action.payload[0]) {
+      cardsOrig = action.payload.map((image) => { return image._links.thumbnail.href })
+    } else {
+      cardsOrig = backupImages.map((element) => element)
+    }
 
     cardsOrig = cardsOrig.slice(0,10)
     // test on only two cards
