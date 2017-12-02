@@ -1,5 +1,5 @@
 # Memory Game with Classic Art
-This is the classic memory card game built with [React](https://reactjs.org/) and [Redux](https://redux.js.org/Redux).  The images on the cards come from the [Artsy API](https://developers.artsy.net).
+This is the classic memory card game built with [React](https://reactjs.org/) and [Redux](https://redux.js.org/Redux).  The images on the cards come from the [Artsy API](https://developers.artsy.net).  [Here](https://memory-react-redux-artsy.herokuapp.com/) is a demo on Heroku.
 
 ## Installation
 Fork and clone the repository.  Then run `bundle install`, `npm install`, and `rake start`.
