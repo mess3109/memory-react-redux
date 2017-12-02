@@ -9,12 +9,13 @@ const artist = artistArray.slice(0, artistArray.length - title.split(" ").length
 
 return (
 	<div className="image-block">
-		<li><img src={image} alt=""/></li>
-		<li>{title} by {artist}</li>
-		<li>{date}</li>
-		<li>{medium}</li>
-		<li>Located at {location}</li>
-		{'\n'}
+		<div className="image-left"><li><img src={image} alt=""/></li></div>
+		<div className="image-right">
+			<li>{title} by {artist}</li>
+			<li>{date}</li>
+			<li>{medium}</li>
+			<li>Located at {location}</li>
+		</div>
 	</div>
 	)
 }

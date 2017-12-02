@@ -1,12 +1,33 @@
 .images {
-	text-align: left;
 	height: 100%;
+	width: 100% ;
+	justify-content: center;
+	min-height:600px;
+	padding: 5px;
 }
 
 .images ul {
 	list-style: none;
+	padding: 0;
 }
 
 .image-block {
-	padding: 10px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	margin: auto;
+	height: auto;
+	padding: 20px;
+}
+
+.image-left {
+	float: left;
+}
+
+.image-right {
+	height: 100%;
+	margin-top: auto ;
+	margin-left: 5px;
+	text-align: left;
 }
