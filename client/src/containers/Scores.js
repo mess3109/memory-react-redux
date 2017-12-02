@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { scores } from '../actions/scoreActions';
 import Score from '../components/Score'
+import '../styles/Scores.css'
 
 
 class Scores extends Component {
@@ -25,6 +26,7 @@ class Scores extends Component {
 
     return (
       <div className="scores">
+        <div className="score-container"><span className="date"><h3>Date</h3></span><span className="name"><h3>Name</h3></span><span className="score"><h3>Rounds</h3></span></div>
         {scores}
       </div>
     );

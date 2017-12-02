@@ -29,11 +29,6 @@
   to { transform: rotate(360deg); }
 }
 
-.scores {
-  min-height:550px;
-  padding: 5px;
-}
-
 .game {
   padding: 5px;
 }

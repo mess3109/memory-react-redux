@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/Scores.css'
 
 const Score = (props) => {
 
@@ -9,7 +10,7 @@ const d = date.getDate()
 const y = date.getYear().toString().substr(-2)
 
 return (		
-		<div>{m}-{d}-{y} {name}: {counter}</div>
+		<div className="score-container"><span className="date">{m}-{d}-{y}</span><span className="name">{name}</span><span className="score">{counter}</span></div>
 	)
 }
 

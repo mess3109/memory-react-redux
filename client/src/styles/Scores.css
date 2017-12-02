@@ -1,0 +1,34 @@
+.scores {
+	width: 100% ;
+	text-align: center;
+	justify-content: center;
+	min-height:600px;
+	padding: 5px;
+}
+
+.score-container {
+	width: 450px ;
+	text-align: center;
+	justify-content: center;
+	margin-right: auto; 
+	margin-left: auto;
+}
+
+.date {
+	width: 150px;
+	justify-content: center;
+	display: inline-block;
+}
+
+.name {
+	width: 150px ;
+	justify-content: center;
+	display: inline-block;
+}
+
+.score {
+	width: 150px;
+	justify-content: center;
+	display: inline-block;
+}
+
