@@ -32,7 +32,6 @@ class Game extends Component {
   };
 
   componentWillMount() {
-    // this.props.fetchImages('https://api.artsy.net/api/artworks?similar_to_artwork_id=516ca69f078b3214780007a9');
     this.props.fetchImages(process.env.REACT_APP_URL)
   }
 
@@ -42,29 +41,29 @@ class Game extends Component {
 
   componentDidUpdate() {
     if (this.props.game.flippedCards.length === 2) {
-    this.props.checkMatch()
-   }
- }
+      this.props.checkMatch()
+    }
+  }
 
- componentWillUnmount() {
- }
+  componentWillUnmount() {
+  }
 
- render() {
+  render() {
    const { game, flipCard } = this.props;
    let form = ""
    if (this.props.game.gameOver) {
     form = <Name handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver} name={this.state.name}/>
-    }
+  }
 
-   return (
-    <div className="game">
+  return (
+  <div className="game">
     <div><button onClick={() => this.startGame()}>Start New Game</button></div>
     <div className="turn-count">Round: {this.props.game.counter}</div>
     {form}
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading} disableClick={game.disableClick}/>
-    </div>
-    );
- }
+  </div>
+  );
+}
 }
 
 const mapStateToProps = (state) => ({ 

@@ -12,16 +12,16 @@ export default class App extends Component {
 	render() {
 		return (
 			<Router>
-			<div>
-			<NavBar />
-			<Route exact path="/" component={Game} />
-			<Route exact path="/scores" component={Scores} />
-			<Route exact path="/images" component={Images} />
-			<hr/>
-			<Footer />
-			</div>
+				<div>
+					<NavBar />
+					<Route exact path="/" component={Game} />
+					<Route exact path="/scores" component={Scores} />
+					<Route exact path="/images" component={Images} />
+					<hr/>
+					<Footer />
+				</div>
 			</Router>
-			);
+		);
 	}
 }
 

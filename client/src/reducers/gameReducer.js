@@ -40,7 +40,6 @@ export default function game(state = initialState, action) {
           cardsOrig.push(backupImages[num])
         }
       }
-      // cardsOrig = cardsOrig.slice(0,2 * Math.floor(cardsOrig.length/2))
     } else {
       cardsOrig = backupImages
     }
