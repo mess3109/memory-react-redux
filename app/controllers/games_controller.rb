@@ -2,7 +2,7 @@ class GamesController < ApplicationController
 
 	def index
 		@games = Game.all.order(:counter => :asc)
-		render json: @games.to_json
+		render json: @games.to_json(:only => [:counter, :name, :created_at])
 	end
 
 	def create
