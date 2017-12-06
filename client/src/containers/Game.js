@@ -57,7 +57,7 @@ class Game extends Component {
 
   return (
   <div className="game">
-    <div><button onClick={() => this.startGame()}>Start New Game</button></div>
+    <div><button onClick={() => { game.flippedCards.length !== 2 ? this.startGame() : "" } }>Start New Game</button></div>
     <div className="turn-count">Round: {this.props.game.counter}</div>
     {form}
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading} disableClick={game.disableClick}/>
