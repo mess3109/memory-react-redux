@@ -32,7 +32,7 @@ class Game extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchImages(process.env.REACT_APP_URL)
+    this.props.fetchImages("paul-cezanne")
   }
 
   startGame = () => {
