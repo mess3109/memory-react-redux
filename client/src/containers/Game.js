@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 import { start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
 import { fetchImages } from '../actions/imageActions';
 
-
 const artists = [
 {"name": "Leonardo da Vinci", "slug": "leonardo-da-vinci"},
 {"name": "Mary Cassatt", "slug": "mary-cassatt"},
@@ -29,6 +28,9 @@ class Game extends Component {
   }
 
   handleArtistChange(event) {
+    this.setState({
+      artistSlug: event.target.value
+    });
     this.props.fetchImages(event.target.value)
   }
 
@@ -36,9 +38,17 @@ class Game extends Component {
     event.preventDefault();
   }
 
+  startGame = () => {
+    this.props.start(this.props.images.images)
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.props.gameOver(this.props.game.counter, this.state.name, this.props.history)
+    this.props.gameOver(
+      this.props.game.counter, 
+      this.state.name, 
+      this.props.history
+      )
     this.setState({ name: "" })
   }
 
@@ -47,10 +57,6 @@ class Game extends Component {
       name: event.target.value
     });
   };
-
-  startGame = () => {
-    this.props.start(this.props.images.images)
-  }
 
   componentDidUpdate() {
     if (this.props.game.flippedCards.length === 2) {
@@ -67,7 +73,8 @@ class Game extends Component {
    return (
     <div className="game">
     {form}
-    <Artists artists={artists} 
+    <Artists 
+    artists={artists} 
     selectArtist={this.props.fetchImages} 
     handleArtistChange={this.handleArtistChange.bind(this)} 
     handleArtistSubmit={this.handleArtistSubmit.bind(this)}
@@ -90,11 +97,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({ 
+    fetchImages: fetchImages,
     start: start,
     flipCard: flipCard,
     checkMatch: checkMatch,
-    gameOver: gameOver,
-    fetchImages: fetchImages
+    gameOver: gameOver
   }, dispatch)
 };
 

@@ -33,7 +33,6 @@ export default function game(state = initialState, action) {
 
     case 'START':
 
-    action.payload = action.payload.filter((artwork) => {return typeof artwork._links.thumbnail === "object"})
     if (action.payload.length > 0) {
       cardsOrig = action.payload.map(image => image._links.thumbnail.href )
       while(cardsOrig.length < 10) {

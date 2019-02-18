@@ -5,9 +5,8 @@ import '../styles/Images.css'
 
 
 class Images extends Component {
-
   render() {
-    const images = this.props.image.images.filter((artwork) => {return typeof artwork._links.thumbnail === "object"}).map((image, index) => 
+    const images = this.props.images.images.map((image, index) => 
       <Image image={image._links.thumbnail.href} 
         key={index}
         title={image.title}
@@ -29,7 +28,7 @@ class Images extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    image: state.image
+    images: state.images
   }
 }
 

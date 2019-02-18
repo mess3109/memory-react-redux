@@ -7,10 +7,10 @@ const Artists = (props) => {
 	})
 
 	return (
-	<form onSubmit={props.handleArtistSubmit}>
+	<form value={props.artistSlug} onSubmit={props.handleArtistSubmit}>
 	<label>
-	Pick an artist: 
-	<select value={props.artistSlug} onChange={props.handleArtistChange}>
+	<select onChange={props.handleArtistChange}>
+	<option hidden disabled selected value> -- pick an artist -- </option>
 	{artists}
 	</select>
 	</label>
