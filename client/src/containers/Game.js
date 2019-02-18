@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import Artists from '../components/Artists'
 import Cards from '../components/Cards'
 import Name from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
+import { setArtist, start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
 import { fetchImages } from '../actions/imageActions';
+
+
+const artists = [
+{"name": "Leonardo da Vinci", "slug": "leonardo-da-vinci"},
+{"name": "Mary Cassatt", "slug": "mary-cassatt"},
+{"name": "Pierre Auguste Renoir", "slug": "pierre-august-renoir"},
+]
 
 class Game extends Component {
 
@@ -32,7 +40,8 @@ class Game extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchImages("paul-cezanne")
+    console.log('hi')
+    this.props.fetchImages("mary-cassatt")
   }
 
   startGame = () => {
@@ -48,6 +57,8 @@ class Game extends Component {
   componentWillUnmount() {
   }
 
+
+
   render() {
    const { game, flipCard } = this.props;
    let form = ""
@@ -56,14 +67,15 @@ class Game extends Component {
   }
 
   return (
-  <div className="game">
+    <div className="game">
     <div><button onClick={() => { game.flippedCards.length !== 2 ? this.startGame() : "" } }>Start New Game</button></div>
     <div className="turn-count">Round: {this.props.game.counter}</div>
     {form}
+    <Artists artists={artists} selectArtist={setArtist}/>
     <Cards cards={game.cards} flipCard={flipCard} loading={game.loading} disableClick={game.disableClick}/>
-  </div>
-  );
-}
+    </div>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({ 
@@ -74,6 +86,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({  
+    setArtist: setArtist,
     start: start,
     flipCard: flipCard,
     checkMatch: checkMatch,

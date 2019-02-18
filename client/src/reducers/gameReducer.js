@@ -16,6 +16,7 @@ function shuffle(array) {
 }
 
 const initialState = {
+  artistSlug: "",
   gameOver: false,
   loading: true,
   cards: cards,
@@ -29,8 +30,15 @@ const initialState = {
 let cardsOrig = []
 
 export default function game(state = initialState, action) {
+
   switch(action.type) {
+
+    case 'SET_ARTIST':
+
+    return Object.assign({}, state, { artistSlug: action.payload });
+
     case 'START':
+
     action.payload = action.payload.filter((artwork) => {return typeof artwork._links.thumbnail === "object"})
     if (action.payload.length > 0) {
       cardsOrig = action.payload.map(image => image._links.thumbnail.href )
@@ -90,9 +98,11 @@ export default function game(state = initialState, action) {
     return Object.assign({}, state, tempState, { flippedCards: [], gameOver: gameOver, disableClick: false });
 
     case 'END_GAME':
+
     return Object.assign({}, state, { gameOver: false } )
 
     default:
+
     return state;
   }
 }

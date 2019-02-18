@@ -1,3 +1,10 @@
+export const setArtist = (slug) => {
+	return {
+		type: 'SET_ARTIST',
+		payload: slug
+	};
+};
+
 export const start = (images) => {
 	return {
 		type: 'START',

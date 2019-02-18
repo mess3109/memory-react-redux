@@ -1,8 +1,6 @@
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsImV4cCI6MTU1MTA0NDY1NiwiaWF0IjoxNTUwNDM5ODU2LCJhdWQiOiI1YTFmN2E4Y2M5ZGMyNDA2NzhkMGU3OGQiLCJpc3MiOiJHcmF2aXR5IiwianRpIjoiNWM2OWQ1YjBmNjEyYTkyOTdhNzRiMGY3In0.itwKhIaRWoXog6CcFVzonBziA3RkM2z5MSYHNTG1g9I"
-
 export const fetchImages = (slug) => {
 
 	const headers = {
