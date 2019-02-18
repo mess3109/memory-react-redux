@@ -18,3 +18,10 @@ export const fetchImages = (slug) => {
 		.then(data => dispatch({ type: 'GET_IMAGES', payload: { slug: slug, images: data._embedded.artworks} }))
 	}
 }
+
+export const setLoading = (boolean) => {
+	return {
+		type: 'SET_LOADING',
+		payload: boolean
+	};
+}
