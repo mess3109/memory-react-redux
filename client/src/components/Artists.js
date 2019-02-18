@@ -1,25 +1,27 @@
 import React from 'react'
-import Artist from './Artist'
 
 const Artists = (props) => {
 
-	const artists = props.artists.map(artist => 
-		<Artist 
+	const artists = props.artists.map(
+		artist => <option 
+		value={artist.slug} 
 		key={artist.slug}
-		slug={artist.slug}
-		name={artist.name}
-		selectArtist={props.selectArtist}
-		/>
+		>{artist.name}
+		</option>
 		)
 
-	return (
-		<div className="artistsContainer">
-		<div className="artist">
+		return (
+		<form onSubmit={props.handleArtistSubmit}>
+		<label>
+		Pick an artist: 
+		<select value={props.artistSlug} onChange={props.handleArtistChange}>
 		{artists}
-		</div>
-		</div>
+		</select>
+		</label>
+		<button onClick={() => { props.flippedCards.length !== 2 ? props.startGame() : "" } }>Start New Game</button>
+		</form>
 		);
+	}
 
-}
+	export default Artists;
 
-export default Artists;

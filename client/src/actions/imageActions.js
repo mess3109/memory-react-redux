@@ -15,6 +15,6 @@ export const fetchImages = (slug) => {
 		.then(response => response.json())
 		.then(data => fetch("https://api.artsy.net/api/artworks?size=10&artist_id=" + data.id, { headers }))
 		.then(response => response.json())
-		.then(data => dispatch({ type: 'GET_IMAGES', payload: data._embedded.artworks }))
+		.then(data => dispatch({ type: 'GET_IMAGES', payload: { slug: slug, images: data._embedded.artworks} }))
 	}
 }

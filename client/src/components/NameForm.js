@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Name = (props) => {
+const NameForm = (props) => {
 
 return (
 	<div className="nameForm">
@@ -12,4 +12,4 @@ return (
 	)
 }
 
-export default Name
+export default NameForm
