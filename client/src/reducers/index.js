@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import game from './gameReducer'
 import score from './scoreReducer'
-import image from './imageReducer'
+import images from './imagesReducer'
  
 const rootReducer = combineReducers({
 	game,
 	score,
-	image
+	images
 });
  
 export default rootReducer;
