@@ -16,7 +16,6 @@ function shuffle(array) {
 }
 
 const initialState = {
-  artistSlug: "",
   gameOver: false,
   cards: cards,
   flippedCards: [],
@@ -31,10 +30,6 @@ let cardsOrig = []
 export default function game(state = initialState, action) {
 
   switch(action.type) {
-
-    case 'SET_ARTIST':
-
-    return Object.assign({}, state, { artistSlug: action.payload });
 
     case 'START':
 

@@ -36,10 +36,6 @@ class Game extends Component {
     event.preventDefault();
   }
 
-  componentWillMount() {
-    console.log('hi')
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     this.props.gameOver(this.props.game.counter, this.state.name, this.props.history)
