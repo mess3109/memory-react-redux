@@ -14,7 +14,7 @@ const Artists = (props) => {
 	{artists}
 	</select>
 	</label>
-	<button onClick={() => { props.flippedCards.length !== 2 ? props.startGame() : "" } }>Start New Game</button>
+	<button>Start New Game</button>
 	</form>
 	);
 }

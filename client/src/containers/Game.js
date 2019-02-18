@@ -5,7 +5,7 @@ import NameForm from '../components/NameForm'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
-import { fetchImages } from '../actions/imageActions';
+import { fetchImages, setLoading } from '../actions/imageActions';
 
 const artists = [
 {"name": "Leonardo da Vinci", "slug": "leonardo-da-vinci"},
@@ -17,29 +17,17 @@ class Game extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      cards: [],
-      flippedCards: [],
-      counter: 0,
-      name: "",
-      disableClick: false,
-      loading: true
-    }
   }
 
   handleArtistChange(event) {
-    this.setState({
-      artistSlug: event.target.value
-    });
     this.props.fetchImages(event.target.value)
   }
 
   handleArtistSubmit(event) {
     event.preventDefault();
-  }
-
-  startGame = () => {
-    this.props.start(this.props.images.images)
+    if (this.props.game.flippedCards.length !== 2) {
+      this.props.start(this.props.images.images)
+    }
   }
 
   handleSubmit(event) {
@@ -70,6 +58,8 @@ class Game extends Component {
 
    const form = this.props.game.gameOver ? <NameForm handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver} name={this.state.name}/> : ""
 
+   const cards = !this.props.images.loading ? <Cards cards={game.cards} flipCard={flipCard} disableClick={game.disableClick}/> : ""
+
    return (
     <div className="game">
     {form}
@@ -83,7 +73,8 @@ class Game extends Component {
     />
     <div className="turn-count">Round: {this.props.game.counter}</div>
 
-    <Cards cards={game.cards} flipCard={flipCard} disableClick={game.disableClick}/>
+    {cards}
+    
     </div>
     );
   }
@@ -98,6 +89,7 @@ const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({ 
     fetchImages: fetchImages,
+    setLoading: setLoading, 
     start: start,
     flipCard: flipCard,
     checkMatch: checkMatch,

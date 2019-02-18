@@ -32,7 +32,7 @@ export default function game(state = initialState, action) {
   switch(action.type) {
 
     case 'START':
-
+    console.log(state)
     if (action.payload.length > 0) {
       cardsOrig = action.payload.map(image => image._links.thumbnail.href )
       while(cardsOrig.length < 10) {
