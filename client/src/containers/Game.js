@@ -19,7 +19,6 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      artistSlug: "",
       cards: [],
       flippedCards: [],
       counter: 0,
@@ -37,6 +36,10 @@ class Game extends Component {
     event.preventDefault();
   }
 
+  componentWillMount() {
+    console.log('hi')
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.gameOver(this.props.game.counter, this.state.name, this.props.history)
@@ -50,7 +53,7 @@ class Game extends Component {
   };
 
   startGame = () => {
-    this.props.start(this.props.image.images)
+    this.props.start(this.props.images.images)
   }
 
   componentDidUpdate() {
@@ -85,7 +88,7 @@ class Game extends Component {
 
 const mapStateToProps = (state) => ({ 
   game: state.game,
-  image: state.image
+  images: state.images
 });
 
 const mapDispatchToProps = (dispatch) => {
