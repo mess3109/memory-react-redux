@@ -19,8 +19,13 @@ class Game extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.setState({ name: "" })
+  }
+
   handleArtistChange(event) {
     this.props.fetchImages(event.target.value)
+    this.props.setLoading(true)
   }
 
   handleArtistSubmit(event) {
