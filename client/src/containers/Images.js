@@ -7,7 +7,7 @@ import '../styles/Images.css'
 class Images extends Component {
   render() {
     const images = this.props.images.images.map((image, index) => 
-      <Image image={image._links.thumbnail.href} 
+      <Image image={image.url} 
         key={index}
         title={image.title}
         slug={image.slug}

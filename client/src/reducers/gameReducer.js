@@ -33,7 +33,7 @@ export default function game(state = initialState, action) {
 
     case 'START':
     if (action.payload.length > 0) {
-      cardsOrig = action.payload.map(image => image._links.thumbnail.href )
+      cardsOrig = action.payload.map(image => image.url )
       while(cardsOrig.length < 10) {
         let num = Math.floor(Math.random() * backupImages.length)
         if (!cardsOrig.find(image => image === backupImages[num])) {
