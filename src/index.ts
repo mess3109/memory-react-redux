@@ -1,13 +1,10 @@
 import express, { Express, Request, Response } from "express";
 import * as dotenv from 'dotenv';
-import { Model } from 'objection';
-import knex from './db/config';
 import imageRouter from './routes/image'
 import artistRouter from './routes/artist'
-const { createProxyMiddleware } = require('http-proxy-middleware');
+// const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
-Model.knex(knex);
 
 dotenv.config();
 
