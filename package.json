@@ -21,9 +21,9 @@
     "sqlite3": "^5.1.7"
   },
   "scripts": {
-    "db:make": "./node_modules/.bin/knex migrate:make --knexfile src/knex/knex.js",
+    "clean": "rm -rf dist",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "yarn clean && yarn build && yarn node dist/index.js",
     "dev": "nodemon src/index.ts",
     "eject": "react-scripts eject"
   },
