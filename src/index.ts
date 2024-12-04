@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import * as dotenv from 'dotenv';
 import imageRouter from './routes/image'
 import artistRouter from './routes/artist'
@@ -35,7 +35,7 @@ app.use('/artists', artistRouter)
 //     }
 //   })
 // );
-  // Enable CORS for all methods
+// Enable CORS for all methods
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

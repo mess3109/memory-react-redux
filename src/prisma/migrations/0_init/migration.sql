@@ -3,6 +3,7 @@ CREATE TABLE `Game` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `artistId` INTEGER NULL,
+    `total` INTEGER NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -42,3 +43,4 @@ ALTER TABLE `Game` ADD CONSTRAINT `Game_artistId_fkey` FOREIGN KEY (`artistId`) 
 
 -- AddForeignKey
 ALTER TABLE `Image` ADD CONSTRAINT `Image_artistId_fkey` FOREIGN KEY (`artistId`) REFERENCES `Artist`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+

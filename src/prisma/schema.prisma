@@ -18,6 +18,7 @@ model Game {
   name      String
   artistId  Int?
   artist    Artist?  @relation(fields: [artistId], references: [id])
+  total     Int?     
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -30,7 +31,7 @@ model Artist {
   artsyId   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Game      Game[]
+  games      Game[]
 }
 
 model Image {
