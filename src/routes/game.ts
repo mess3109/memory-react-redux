@@ -1,23 +1,19 @@
 import express, { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import GameService from "../services/game";
 
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const games = await prisma.game.findMany();
+  const games = await GameService.getAll();
   res.send({ games });
 });
 
 router.post("/", async (req: Request, res: Response) => {
 
-  const { name, total, artistId } = req.body;
+  const { name, total, artistSlug } = req.body.game;
 
-  const game = await prisma.game.create({
-    data: {
-      name, total, artistId
-    }
-  })
+  const game = await GameService.create(name, total, artistSlug)
+
   res.send({ game });
 });
 

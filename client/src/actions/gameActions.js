@@ -15,27 +15,29 @@ export const flipCard = (id) => {
 export const checkMatch = () => {
 	return {
 		type: 'CHECK_MATCH',
-		payload: new Promise((resolve,reject) => {
-			setTimeout(() => { resolve() }, 1000 )
-		} )
+		payload: new Promise((resolve, reject) => {
+			setTimeout(() => { resolve() }, 1000)
+		})
 	}
 }
 
-export const gameOver = (counter, name, history) => {
+export const gameOver = (total, name, artistSlug, history) => {
 	const score = JSON.stringify({
 		game: {
-			counter: counter,
-			name: name
+			total,
+			name,
+			artistSlug,
 		}
 	});
 	return (dispatch) => {
-		return fetch('/api/games', {
-			method: "post", body: score, headers: { "Content-Type": "application/json" }})
-		.then(response => response.json())
-		.then(() => {
-			dispatch({ type: 'END_GAME' })
-			history.push('/scores')
+		return fetch('http://localhost:3001/games', {
+			method: "post", body: score, headers: { "Content-Type": "application/json" }
 		})
+			.then(response => response.json())
+			.then(() => {
+				dispatch({ type: 'END_GAME' })
+				history.push('/scores')
+			})
 	}
 }
 

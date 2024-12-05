@@ -1,17 +1,22 @@
 import express, { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import ArtistService from "../services/artist";
 
 const router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const artists = await prisma.artist.findMany();
+  const artists = ArtistService.getAll();
   res.send({ artists });
+});
+
+router.get("/:slug", async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  const artist = await ArtistService.getBySlug(slug)
+  res.send({ artist: artist });
 });
 
 router.get("/:slug/images", async (req: Request, res: Response) => {
   const { slug } = req.params;
-  const artist = await prisma.artist.findUnique({ where: { slug }, include: { images: true } });
+  const artist = await ArtistService.getBySlug(slug)
   res.send({ images: artist?.images });
 });
 

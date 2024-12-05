@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import * as dotenv from 'dotenv';
 import imageRouter from './routes/image'
 import artistRouter from './routes/artist'
+import gameRouter from './routes/game'
 // const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
@@ -24,6 +25,7 @@ app.use(function (req, res, next) {
 
 app.use('/images', imageRouter)
 app.use('/artists', artistRouter)
+app.use('/games', gameRouter)
 
 // app.use(
 //   '/api',
