@@ -5,8 +5,6 @@ import artistRouter from './routes/artist'
 import gameRouter from './routes/game'
 // const { createProxyMiddleware } = require('http-proxy-middleware');
 
-
-
 dotenv.config();
 
 const app: Express = express();
@@ -20,8 +18,6 @@ app.use(function (req, res, next) {
 
   next();
 });
-
-
 
 app.use('/images', imageRouter)
 app.use('/artists', artistRouter)
