@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE `Image` ADD COLUMN `date` VARCHAR(191) NULL,
-    ADD COLUMN `location` VARCHAR(191) NULL,
-    ADD COLUMN `medium` VARCHAR(191) NULL;
