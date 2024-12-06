@@ -14,15 +14,15 @@ class Scores extends Component {
 
   render() {
 
-    const scores = this.props.score.scores.map(score => 
-          <Score
-            key={score.id}
-            id={score.id}
-            name={score.name}
-            counter={score.counter}
-            date={score.created_at}
-          />
-        )
+    const scores = this.props.score.scores.map(score =>
+      <Score
+        key={score.id}
+        id={score.id}
+        name={score.name}
+        counter={score.total}
+        date={score.createdAt}
+      />
+    )
 
     return (
       <div className="scores">
@@ -40,9 +40,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({  
+  return bindActionCreators({
     scores: scores
-}, dispatch)};
+  }, dispatch)
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scores);
 

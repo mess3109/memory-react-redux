@@ -6,24 +6,25 @@ import '../styles/Images.css'
 
 class Images extends Component {
   render() {
-    const images = this.props.images.images.map((image, index) => 
-      <Image image={image._links.thumbnail.href} 
+    console.log(this.props.images.images.images)
+    const images = this.props.images.images.images.map((image, index) =>
+      <Image image={image.url}
         key={index}
         title={image.title}
         slug={image.slug}
         date={image.date}
-        location={image.collecting_institution}
+        location={image.location}
         medium={image.medium}
       />
-      )
-      return (
+    )
+    return (
       <div className="images">
         <ul>
           {images}
         </ul>
       </div>
-      );
-    }
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
