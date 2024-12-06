@@ -42,6 +42,9 @@ model Image {
   artistId  Int
   artist    Artist   @relation(fields: [artistId], references: [id])
   slug      String   @unique
+  date      String?
+  location  String?
+  medium    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

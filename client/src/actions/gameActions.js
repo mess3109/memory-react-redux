@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 export const start = (images) => {
 	return {
 		type: 'START',
@@ -30,7 +32,7 @@ export const gameOver = (total, name, artistSlug, history) => {
 		}
 	});
 	return (dispatch) => {
-		return fetch('http://localhost:3001/games', {
+		return fetch(`${API_BASE_URL}/games`, {
 			method: "post", body: score, headers: { "Content-Type": "application/json" }
 		})
 			.then(response => response.json())
