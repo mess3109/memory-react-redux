@@ -10,7 +10,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 3001;
 
-console.log(port)
+console.log('port: ', port)
 
 app.use(express.json())
 
