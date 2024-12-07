@@ -22,7 +22,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npx tsc && yarn clean && yarn build",
+    "build": "tsc && yarn clean && yarn build",
     "start": "npm run build && node dist/index.js",
     "dev": "nodemon src/index.ts",
     "eject": "react-scripts eject",
