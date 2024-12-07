@@ -22,8 +22,9 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "start": "node ./dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "tsc && node dist/index.js",
+    "start": "node dist/index.js",
+    "postinstall": "tsc",
     "eject": "react-scripts eject",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
