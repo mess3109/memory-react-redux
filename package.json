@@ -25,8 +25,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "eject": "react-scripts eject",
-    "build": "webpack --mode production",
-    "heroku-postbuild": "yarn && npm run build"
+    "heroku-postbuild": "cd client && yarn install"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
