@@ -38,7 +38,7 @@ app.use('/api/games', gameRouter)
 
 if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
   });
 }
 
