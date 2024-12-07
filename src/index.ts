@@ -19,9 +19,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/images', imageRouter)
-app.use('/artists', artistRouter)
-app.use('/games', gameRouter)
+app.use('/api/images', imageRouter)
+app.use('/api/artists', artistRouter)
+app.use('/api/games', gameRouter)
 
 // app.use(
 //   '/api',

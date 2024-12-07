@@ -32,7 +32,7 @@ export const gameOver = (total, name, artistSlug, history) => {
 		}
 	});
 	return (dispatch) => {
-		return fetch(`${API_BASE_URL}/games`, {
+		return fetch(`/api/games`, {
 			method: "post", body: score, headers: { "Content-Type": "application/json" }
 		})
 			.then(response => response.json())
