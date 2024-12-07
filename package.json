@@ -26,8 +26,8 @@
     "start": "yarn clean && yarn build && node dist/index.js",
     "dev": "nodemon src/index.ts",
     "eject": "react-scripts eject",
-    "tsc": "tsc",
-    "postinstall": "npm run tsc"
+    "postinstall": "tsc",
+    "heroku-postbuild": "cd client && yarn install && yarn start"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
