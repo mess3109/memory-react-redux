@@ -8,7 +8,7 @@ import gameRouter from './routes/game'
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.API_PORT || 3001;
+const port = process.env.PORT || 3001;
 
 app.use(express.json())
 
