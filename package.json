@@ -24,8 +24,7 @@
     "clean": "rm -rf dist",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "cd client && yarn install"
+    "eject": "react-scripts eject"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
