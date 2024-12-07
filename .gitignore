@@ -17,6 +17,9 @@
 !/log/.keep
 !/tmp/.keep
 
+npm-debug.log
+.DS_Store
+
 .byebug_history
 .env
 
