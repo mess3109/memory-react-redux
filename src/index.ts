@@ -10,6 +10,8 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 3001;
 
+console.log(port)
+
 app.use(express.json())
 
 app.use(function (req, res, next) {
