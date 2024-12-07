@@ -3,14 +3,13 @@ import * as dotenv from 'dotenv';
 import imageRouter from './routes/image'
 import artistRouter from './routes/artist'
 import gameRouter from './routes/game'
+const path = require('path');
 // const { createProxyMiddleware } = require('http-proxy-middleware');
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3001;
-
-console.log('port: ', port)
 
 app.use(express.json())
 
@@ -36,6 +35,12 @@ app.use('/api/games', gameRouter)
 //   })
 // );
 // Enable CORS for all methods
+
+if (process.env.NODE_ENV === "production") {
+  app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
+  });
+}
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
