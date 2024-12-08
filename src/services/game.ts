@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import ArtistService from './artist';
-const prisma = new PrismaClient()
+import prisma from '../prisma/connection';
 
 const GameService = {
     getAll: async () => {

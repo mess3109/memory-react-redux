@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import ImageService from './image';
+import ArtsyClient from '../clients/artsy';
+import prisma from '../prisma/connection';
 
 const ArtistService = {
     getAll: async () => {
@@ -11,25 +12,27 @@ const ArtistService = {
     getById: async (id: number) => {
         return await prisma.artist.findUnique({ where: { id }, include: { images: true } });
     },
-    createOrUpdate: async (data: {
-        slug: string,
-        artsyId: string,
-        name: string,
-    }) => {
+    createOrUpdate: async (slug: string) => {
+
+        const artist = await ArtsyClient.getArtist(slug)
+
         return await prisma.artist.upsert({
             where: {
-                slug: data.slug,
+                slug: artist.slug,
             },
             create: {
-                artsyId: data.artsyId,
-                name: data.name,
-                slug: data.slug,
+                artsyId: artist.artsyId,
+                name: artist.name,
+                slug: artist.slug,
             },
             update: {
-                artsyId: data.artsyId,
-                name: data.name,
+                artsyId: artist.artsyId,
+                name: artist.name,
             }
         });
+    },
+    createOrUpdateImages: async (slug: string) => {
+        await ImageService.createByArtistSlug(slug);
     },
 }
 

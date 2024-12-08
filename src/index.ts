@@ -1,10 +1,8 @@
 import express, { Express } from "express";
 import * as dotenv from 'dotenv';
-import imageRouter from './routes/image'
 import artistRouter from './routes/artist'
 import gameRouter from './routes/game'
 const path = require('path');
-// const { createProxyMiddleware } = require('http-proxy-middleware');
 
 dotenv.config();
 
@@ -20,21 +18,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/api/images', imageRouter)
 app.use('/api/artists', artistRouter)
 app.use('/api/games', gameRouter)
 
-// app.use(
-//   '/api',
-//   createProxyMiddleware({
-//     target: 'http://localhost:3000',
-//     changeOrigin: true,
-//     pathRewrite: function(path, req) {
-//       return '/api'.concat(path)
-//     }
-//   })
-// );
-// Enable CORS for all methods
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static('client/build'));

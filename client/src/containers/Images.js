@@ -6,8 +6,7 @@ import '../styles/Images.css'
 
 class Images extends Component {
   render() {
-    console.log(this.props.images.images.images)
-    const images = this.props.images.images.images.map((image, index) =>
+    const images = this.props.images.images.map((image, index) =>
       <Image image={image.url}
         key={index}
         title={image.title}

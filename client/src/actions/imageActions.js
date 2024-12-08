@@ -1,13 +1,17 @@
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+export const fetchArtists = () => {
+	return dispatch => {
+		return fetch(`/api/artists`)
+			.then(response => response.json())
+			.then(data => dispatch({ type: 'GET_ARTISTS', payload: { artists: data.artists } }))
+	}
+}
 
 export const fetchImages = (slug) => {
-	console.log(process.env)
 	return dispatch => {
 		return fetch(`/api/artists/${slug}/images`)
 			.then(response => response.json())
-			.then(images => dispatch({ type: 'GET_IMAGES', payload: { slug: slug, images: images } }))
+			.then(data => dispatch({ type: 'GET_IMAGES', payload: { slug: slug, images: data.images } }))
 	}
-
 }
 
 export const setLoading = (boolean) => {
