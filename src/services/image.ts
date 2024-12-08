@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import ArtistService from './artist';
 import ArtsyClient from '../clients/artsy';
-const prisma = new PrismaClient()
+import prisma from '../prisma/connection';
 
 const ImageService = {
     getAll: async () => {
@@ -73,6 +72,6 @@ const ImageService = {
                 });
             }
         }
-    }
+    },
 }
 export default ImageService;

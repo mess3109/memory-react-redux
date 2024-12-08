@@ -44,7 +44,6 @@ export default function game(state = initialState, action) {
       }
 
       // test on only two cards
-      cardsOrig = cardsOrig.slice(0, 2)
       let images = shuffle(cardsOrig.concat(cardsOrig))
 
       for (let i = 0; i < images.length; i++) {

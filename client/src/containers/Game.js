@@ -7,20 +7,25 @@ import { bindActionCreators } from 'redux';
 import { start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
 import { fetchImages, setLoading } from '../actions/imageActions';
 
-const artists = [
-  { "name": "Leonardo da Vinci", "slug": "leonardo-da-vinci" },
-  { "name": "Mary Cassatt", "slug": "mary-cassatt" },
-  { "name": "Pierre Auguste Renoir", "slug": "pierre-auguste-renoir" },
-]
-
 class Game extends Component {
 
-  // constructor(props) {
-  //   super(props); ccc
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      artists: null
+    };
+  }
+
+  fetchArtists = () => fetch(`/api/artists`)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ artists: data.artists })
+    }).catch((error) => console.log(error));
+
 
   componentDidMount() {
     this.setState({ name: "" })
+    this.fetchArtists();
   }
 
   handleArtistChange(event) {
@@ -60,6 +65,11 @@ class Game extends Component {
   }
 
   render() {
+    const { artists } = this.state;
+
+    if (!artists) {
+      return (<div>Loading...</div>)
+    }
 
     const { game, flipCard } = this.props;
 
