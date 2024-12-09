@@ -1,8 +1,8 @@
 .images {
 	height: 100%;
-	width: 100% ;
+	width: 100%;
 	justify-content: center;
-	min-height:600px;
+	min-height: 600px;
 	padding: 5px;
 }
 
@@ -27,7 +27,12 @@
 
 .image-right {
 	height: 100%;
-	margin-top: auto ;
+	margin-top: auto;
 	margin-left: 5px;
 	text-align: left;
+}
+
+
+.title {
+	font-style: italic
 }

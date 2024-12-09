@@ -6,21 +6,24 @@ import '../styles/Images.css'
 
 class Images extends Component {
   render() {
-    const images = this.props.images.images.map((image, index) =>
-      <Image image={image.url}
-        key={index}
-        title={image.title}
-        slug={image.slug}
-        date={image.date}
-        location={image.location}
-        medium={image.medium}
-      />
-    )
+    const { images } = this.props.images;
+
     return (
-      <div className="images">
-        <ul>
-          {images}
-        </ul>
+      <div>
+        <div className="images">
+          <ul>
+            {images.map((image, index) =>
+              <Image image={image.url}
+                key={index.artsyId}
+                title={image.title}
+                slug={image.slug}
+                date={image.date}
+                location={image.location}
+                medium={image.medium}
+              />
+            )}
+          </ul>
+        </div>
       </div>
     );
   }

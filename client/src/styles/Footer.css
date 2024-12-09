@@ -4,7 +4,8 @@
   padding: 5px;
   bottom: 0;
   left: 0;
-  position: fixed;
+  position: absolute;
+  height: 15px;
   margin: 0;
   margin-bottom: 0;
 }
