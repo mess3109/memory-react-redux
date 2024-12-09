@@ -1,12 +1,44 @@
 # Memory Game with Classic Art
-This is the classic memory card game built with React and Redux on the frontend and Express and Prisma on the backend.  The images on the cards come from the [Artsy API](https://developers.artsy.net).  [Here](https://memory-react-redux-artsy.herokuapp.com/) is a demo on Heroku.
+This is the classic memory card game built with the following technologies:
+- Frontend: React and Redux 
+- API: Typescript and Express 
+- ORM: Prisma 
+- Database: PostgreSQL
 
-## Database
+The images on the cards come from the [Artsy API](https://developers.artsy.net).  [Here](https://memory-art-35efd80c8dec.herokuapp.com/) is a demo hosted on Heroku.
 
+## Local Dev
+To run this app locally, run the backend and frontend in separate terminals
 
+Requirements: `Node v22`, `yarn`, `npm`
 
-## Installation
+Backend:\
+```$ yarn install```\
+```$ yarn dev```
 
+Frontend:\
+```$ cd client```\
+```$ yarn install```\
+```$ yarn start```
+
+Database:\
+Create a database in postgres named ```memoryart```
+
+Migrations:\
+```yarn migrate```
+
+DB Seed\
+```yarn seed```
+
+```Environment Variables```:\
+DATABASE_URL="postgresql://{{DB_USER}}:{{DB_PASSWORD}}:@localhost:5432/memoryart"
+
+If you want to populate the database with images connected to the Artsy API, create a developer account with the Artsy API [here] (https://developers.artsy.net/).\
+ARTSY_BASE_URL=https://api.artsy.net/api\
+ARTSY_CLIENT_ID=\
+ARTSY_CLIENT_SECRET=
+
+## API Docs
 
 
 
