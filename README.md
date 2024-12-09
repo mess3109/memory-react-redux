@@ -31,6 +31,7 @@ DB Seed\
 ```yarn seed```
 
 ```Environment Variables```:\
+
 DATABASE_URL="postgresql://{{DB_USER}}:{{DB_PASSWORD}}:@localhost:5432/memoryart"
 
 If you want to populate the database with images connected to the Artsy API, create a developer account with the Artsy API [here] (https://developers.artsy.net/).\

@@ -43,7 +43,9 @@ export default function game(state = initialState, action) {
         cardsOrig = backupImages
       }
 
-      // test on only two cards
+      if (process.env.REACT_APP_MAX_CARDS > 0) {
+        cardsOrig = cardsOrig.slice(0, process.env.REACT_APP_MAX_CARDS)
+      }
       let images = shuffle(cardsOrig.concat(cardsOrig))
 
       for (let i = 0; i < images.length; i++) {

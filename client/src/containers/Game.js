@@ -79,7 +79,6 @@ class Game extends Component {
 
     return (
       <div className="game">
-        {form}
         <Artists
           artists={artists}
           selectArtist={this.props.fetchImages}
@@ -89,9 +88,8 @@ class Game extends Component {
           startGame={this.startGame}
         />
         <div className="turn-count">Round: {this.props.game.counter}</div>
-
         {cards}
-
+        {form}
       </div>
     );
   }
