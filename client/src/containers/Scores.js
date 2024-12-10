@@ -1,49 +1,43 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { scores } from '../actions/scoreActions';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Score from '../components/Score'
 import '../styles/Scores.css'
 
 
-class Scores extends Component {
+function Scores() {
 
-  componentWillMount() {
-    this.props.scores();
+  const [scores, setScores] = useState([])
+  const [fetchingScores, setFetchingScores] = useState(false)
+
+  useEffect(() => {
+    setFetchingScores(true)
+    fetch(`/api/games`)
+      .then(response => response.json())
+      .then(data => {
+        setScores(data.games)
+        setFetchingScores(false)
+      })
+  }, [])
+
+  if (fetchingScores) {
+    return (<div>Loading Scores...</div>)
   }
 
-  render() {
-
-    const scores = this.props.score.scores.map(score =>
-      <Score
-        key={score.id}
-        id={score.id}
-        name={score.name}
-        counter={score.total}
-        date={score.createdAt}
-      />
-    )
-
-    return (
-      <div className="scores">
-        <div className="score-container"><span className="date"><h3>Date</h3></span><span className="name"><h3>Name</h3></span><span className="score"><h3>Rounds</h3></span></div>
-        {scores}
-      </div>
-    );
-  }
+  return (
+    <div className="scores" >
+      <div className="score-container"><span className="date"><h3>Date</h3></span><span className="name"><h3>Name</h3></span><span className="score"><h3>Rounds</h3></span></div>
+      {scores.length === 0 ? '' : scores.map(score =>
+        <Score
+          key={score.id}
+          id={score.id}
+          name={score.name}
+          counter={score.total}
+          date={score.createdAt}
+        />
+      )}
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    score: state.score
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    scores: scores
-  }, dispatch)
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Scores);
+export default Scores;
 

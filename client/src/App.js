@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './styles/App.css';
 import Game from './containers/Game';
 import Scores from './containers/Scores';
@@ -7,10 +7,10 @@ import Footer from './components/Footer';
 import Images from './containers/Images';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-export default class App extends Component {
+function App() {
 
-	render() {
-		return (
+	return (
+		<div>
 			<Router>
 				<div>
 					<NavBar />
@@ -19,7 +19,9 @@ export default class App extends Component {
 					<Route exact path="/images" component={Images} />
 					<Footer />
 				</div>
-			</Router>
-		);
-	}
+			</Router >
+		</div >
+	);
 }
+
+export default App;
