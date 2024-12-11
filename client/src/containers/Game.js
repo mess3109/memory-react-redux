@@ -1,115 +1,108 @@
-import React, { Component } from 'react'
-import Artists from '../components/Artists'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Cards from '../components/Cards'
 import NameForm from '../components/NameForm'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+import { useSelector, useDispatch } from 'react-redux'
 import { start, flipCard, checkMatch, gameOver } from '../actions/gameActions';
 import { fetchImages, setLoading } from '../actions/imageActions';
 
-class Game extends Component {
+const Game = () => {
+  const [state, setState] = useState({})
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      artists: null
-    };
+  const images = useSelector(state => state.images);
+  const game = useSelector(state => state.game);
+  // const [flippedCards, setFlippedCards] = useState([])
+  const [artists, setArtists] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  let navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const [fetchingArtists, setFetchingArtists] = useState(false)
+
+  useEffect(() => {
+    setFetchingArtists(true)
+    fetchArtists()
+  }, [])
+
+  useEffect(() => {
+    if (game.flippedCards.length === 2) {
+      dispatch(checkMatch())
+    }
+  }, [game])
+
+  const fetchArtists = () => {
+    fetch(`/api/artists`)
+      .then(response => response.json())
+      .then(data => {
+        setArtists(data.artists)
+      }).then(() => setFetchingArtists(false)).catch((error) => console.log(error));
   }
 
-  fetchArtists = () => fetch(`/api/artists`)
-    .then(response => response.json())
-    .then(data => {
-      this.setState({ artists: data.artists })
-    }).catch((error) => console.log(error));
-
-
-  componentDidMount() {
-    this.setState({ name: "" })
-    this.fetchArtists();
+  const handleArtistChange = (artistSlug) => {
+    dispatch(fetchImages(artistSlug))
+    setLoading(true)
+    setState({ ...state, artistSlug })
   }
 
-  handleArtistChange(event) {
-    this.props.fetchImages(event.target.value)
-    this.props.setLoading(true)
-    this.setState({ artistSlug: event.target.value })
+
+  const dispatchFlipCard = (id) => {
+    dispatch(flipCard(id))
   }
 
-  handleArtistSubmit(event) {
+
+  const handleArtistSubmit = (event) => {
     event.preventDefault();
-    if (this.props.game.flippedCards.length !== 2) {
-      this.props.start(this.props.images.images)
+    if (game.flippedCards.length !== 2) {
+      dispatch(start(images.images))
     }
   }
 
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.gameOver(
-      this.props.game.counter,
-      this.state.name,
-      this.state.artistSlug,
-      this.props.history
-    )
-    this.setState({ name: "" })
+    dispatch(gameOver(
+      state.counter,
+      state.name,
+      state.artistSlug,
+    ))
+    setState({ ...state, name: '' })
+    navigate('/scores')
   }
 
-  handleChange(event) {
-    this.setState({
-      name: event.target.value
-    });
+  const handleNameChange = (event) => {
+    setState({ ...state, name: event.target.value })
   };
 
-  componentDidUpdate() {
-    if (this.props.game.flippedCards.length === 2) {
-      this.props.checkMatch()
-    }
+  if (artists.length === 0) {
+    return (<div>Loading...</div>)
   }
 
-  render() {
-    const { artists } = this.state;
+  return (
+    <div className="game">
 
-    if (!artists) {
-      return (<div>Loading...</div>)
-    }
-
-    const { game, flipCard } = this.props;
-
-    const form = this.props.game.gameOver ? <NameForm handleSubmit={this.handleSubmit.bind(this)} handleChange={this.handleChange.bind(this)} gameOver={this.props.game.gameOver} name={this.state.name} /> : ""
-
-    const cards = !this.props.images.loading ? <Cards cards={game.cards} flipCard={flipCard} disableClick={game.disableClick} /> : ""
-
-    return (
-      <div className="game">
-        <Artists
-          artists={artists}
-          selectArtist={this.props.fetchImages}
-          handleArtistChange={this.handleArtistChange.bind(this)}
-          handleArtistSubmit={this.handleArtistSubmit.bind(this)}
-          flippedCards={game.flippedCards}
-          startGame={this.startGame}
-        />
-        <div className="turn-count">Round: {this.props.game.counter}</div>
-        {cards}
-        {form}
-      </div>
-    );
-  }
+      <form value={state.artistSlug} onSubmit={(e) => handleArtistSubmit(e)}>
+        <label>
+          <select onChange={(e) => handleArtistChange(e.target.value)}>
+            <option hidden disabled selected value> -- pick an artist -- </option>
+            {artists.map(artist => {
+              return <option value={artist.slug} key={artist.slug}>{artist.name}</option>
+            })}
+          </select>
+        </label>
+        <button>Start New Game</button>
+      </form>
+      <div className="turn-count">Round: {game.counter}</div>
+      {!images.loading ?
+        <Cards cards={game.cards} flipCard={(id) => dispatchFlipCard(id)} disableClick={game.disableClick} />
+        : ""
+      }
+      {game.gameOver ?
+        <NameForm handleSubmit={handleSubmit} handleChange={handleNameChange} gameOver={game.gameOver} name={state.name} />
+        : ""
+      }
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  game: state.game,
-  images: state.images
-});
-
-const mapDispatchToProps = (dispatch) => {
-
-  return bindActionCreators({
-    fetchImages: fetchImages,
-    setLoading: setLoading,
-    start: start,
-    flipCard: flipCard,
-    checkMatch: checkMatch,
-    gameOver: gameOver
-  }, dispatch)
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default Game;

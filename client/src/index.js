@@ -1,16 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store'
-require('dotenv').config()
+// const dotenv = require("dotenv");
 
-ReactDOM.render(
+// dotenv.config();
+
+// require('dotenv').config()
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
   <Provider store={store}>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </Provider>
-  , document.getElementById('root')
 );
-registerServiceWorker();
+
+
+reportWebVitals();

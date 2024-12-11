@@ -21,7 +21,7 @@ export const checkMatch = () => {
 	}
 }
 
-export const gameOver = (total, name, artistSlug, history) => {
+export const gameOver = (total, name, artistSlug) => {
 	const score = JSON.stringify({
 		game: {
 			total,
@@ -36,7 +36,6 @@ export const gameOver = (total, name, artistSlug, history) => {
 			.then(response => response.json())
 			.then(() => {
 				dispatch({ type: 'END_GAME' })
-				history.push('/scores')
 			})
 	}
 }

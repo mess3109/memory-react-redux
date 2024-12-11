@@ -4,7 +4,7 @@ import Image from '../components/Image'
 import '../styles/Images.css'
 
 
-function Images() {
+const Images = () => {
   const images = useSelector(state => state.images.images);
 
   return (
