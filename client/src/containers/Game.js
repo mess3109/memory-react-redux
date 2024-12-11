@@ -11,7 +11,6 @@ const Game = () => {
 
   const images = useSelector(state => state.images);
   const game = useSelector(state => state.game);
-  // const [flippedCards, setFlippedCards] = useState([])
   const [artists, setArtists] = useState([])
   const [loading, setLoading] = useState(false)
 
