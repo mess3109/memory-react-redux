@@ -20,7 +20,7 @@
     "migrate": "npx prisma migrate deploy",
     "seed": "npx prisma db seed",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && yarn install && npm run build"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma",

@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Images from './containers/Images';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-function App() {
+const App = () => {
 
 	return (
 		<div>
