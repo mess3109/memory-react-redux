@@ -1,17 +1,22 @@
 import React from 'react'
 import '../styles/Card.css'
 
-const Card = (props) => {
+const Card = ({ image, disableClick, flipCard, id, isFlipped }) => {
 
-	const { image } = props;
+	const onClick = () => {
+		if (!disableClick) {
+			flipCard(id)
+		}
+	};
 
 	return (
-		<div className="card" onClick={() => { !props.disableClick ? props.flipCard(props.id) : null }}>
-			{props.isFlipped ?
-				<div className="card-up" ><img src={image} alt="" /></div> :
-				<div className="card-down"></div>
+		<div className="card" onClick={onClick}>
+			{
+				isFlipped ?
+					<div className="card-up" ><img src={image} alt="" /></div> :
+					<div className="card-down"></div>
 			}
-		</div>
+		</div >
 	)
 }
 

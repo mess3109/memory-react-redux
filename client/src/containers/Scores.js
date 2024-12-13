@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import Score from '../components/Score'
 import '../styles/Scores.css'
 
 
-function Scores() {
+const Scores = () => {
 
   const [scores, setScores] = useState([])
   const [fetchingScores, setFetchingScores] = useState(false)
