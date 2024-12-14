@@ -16,7 +16,6 @@ const App = () => {
 					<NavBar />
 					<Route exact path="/" component={Game} />
 					<Route exact path="/scores" component={Scores} />
-					<Route exact path="/images" component={Images} />
 					<Footer />
 				</div>
 			</Router >
