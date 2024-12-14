@@ -58,13 +58,10 @@ const Game = () => {
 
   const handleArtistSubmit = (e) => {
     e.preventDefault();
-
+    setLoading(true)
     axios.get(`/api/artists/${props.artistSlug}/images`)
       .then(response => {
-        setProps({ ...props, images: response.data.images })
-      })
-      .then(() => {
-        const newCards = initiateCards(props.images)
+        const newCards = initiateCards(response.data.images)
         setCards([...newCards])
         setProps({ ...props, counter: 0 })
       })
