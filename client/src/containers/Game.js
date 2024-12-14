@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Cards from '../components/Cards'
 import NameForm from '../components/NameForm'
 import { initiateCards, checkGameOver } from '../helpers/game'
-import '../styles/Cards.css'
+import axios from 'axios'
 
 const Game = () => {
   const history = useHistory();
@@ -15,11 +15,12 @@ const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false)
 
   useEffect(() => {
-    fetch(`/api/artists`)
-      .then(response => response.json())
-      .then(data => {
-        setProps({ ...props, artists: data.artists })
-      }).then(() => { setLoading(false) }).catch((error) => console.log(error));
+    axios.get('/api/artists')
+      .then(response => {
+        setProps({ ...props, artists: response.data.artists })
+      })
+      .then(() => { setLoading(false) })
+      .catch((error) => console.log(error));
   }, [])
 
   useEffect(() => {
@@ -27,6 +28,13 @@ const Game = () => {
       checkMatch()
     }
   }, [JSON.stringify(flippedCards)])
+
+  const reset = () => {
+    setProps({ ...props, counter: 0 })
+    setIsGameOver(false)
+    setDisableClick(false)
+    setFlippedCards([])
+  }
 
   const checkMatch = () => {
     const tempCards = [...cards]
@@ -37,30 +45,31 @@ const Game = () => {
       card1.isFlipped = false
     }
 
-    if (checkGameOver(cards)) {
-      setIsGameOver(true)
-      return;
-    }
-
     setTimeout(() => {
       setDisableClick(false)
       setCards(tempCards)
       setFlippedCards([])
+      if (checkGameOver(cards)) {
+        setIsGameOver(true)
+        return;
+      }
     }, 1000);
   }
 
   const handleArtistSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
 
-    fetch(`/api/artists/${props.artistSlug}/images`)
-      .then(response => response.json())
-      .then(data => setProps({ ...props, images: data.images }))
+    axios.get(`/api/artists/${props.artistSlug}/images`)
+      .then(response => {
+        setProps({ ...props, images: response.data.images })
+      })
       .then(() => {
         const newCards = initiateCards(props.images)
         setCards([...newCards])
         setProps({ ...props, counter: 0 })
-      }).then(() => setLoading(false))
+      })
+      .then(() => { setLoading(false) })
+      .catch((error) => console.log(error));
   }
 
   const flipCard = (id) => {
@@ -104,6 +113,11 @@ const Game = () => {
       })
   }
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+    reset()
+  }
+
   if (loading) {
     return (<div>Loading...</div>)
   }
@@ -133,7 +147,8 @@ const Game = () => {
         <NameForm
           handleSubmit={(e) => handleSubmit(e)}
           handleChange={(e) => setProps({ ...props, name: e.target.value })}
-          gameOver={isGameOver} name={props.name}
+          handleCancel={(e) => handleCancel(e)}
+          name={props.name}
         />
       }
     </div>
