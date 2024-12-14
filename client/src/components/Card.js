@@ -1,12 +1,10 @@
 import React from 'react'
 import '../styles/Card.css'
 
-const Card = ({ image, disableClick, flipCard, id, isFlipped }) => {
+const Card = ({ image, flipCard, id, isFlipped }) => {
 
 	const onClick = () => {
-		if (!disableClick) {
-			flipCard(id)
-		}
+		flipCard(id)
 	};
 
 	return (

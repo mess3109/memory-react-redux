@@ -15,3 +15,36 @@ export const shuffle = (array) => {
     return array
 }
 
+export const initiateCards = (images) => {
+    let originalCards = backupImages;
+    if (images && images.length > 0) {
+        originalCards = images.map(image => image.url)
+        while (originalCards.length < 10) {
+            let num = Math.floor(Math.random() * backupImages.length)
+            if (!originalCards.find(image => image === backupImages[num])) {
+                originalCards.push(backupImages[num])
+            }
+        }
+    }
+
+    //Test environment
+    if (process.env.REACT_APP_MAX_CARDS > 0) {
+        originalCards = originalCards.slice(0, process.env.REACT_APP_MAX_CARDS)
+    }
+    originalCards = shuffle(originalCards.concat(originalCards))
+
+    let cards = []
+    for (let i = 0; i < originalCards.length; i++) {
+        cards[i] = {
+            id: i,
+            image: originalCards[i],
+            isFlipped: false
+        }
+    }
+    return cards;
+}
+
+export const checkGameOver = (cards) => {
+    const unflippedCard = cards.find((card) => { return card.isFlipped === false })
+    return !unflippedCard;
+}
