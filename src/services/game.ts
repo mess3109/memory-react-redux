@@ -3,7 +3,11 @@ import prisma from '../prisma/connection';
 
 const GameService = {
     getAll: async () => {
-        return await prisma.game.findMany();
+        return await prisma.game.findMany({
+            orderBy: {
+                total: "asc",
+            }
+        });
     },
     create: async (
         name: string,

@@ -14,7 +14,6 @@ const Cards = (props) => {
 						image={card.image}
 						isFlipped={card.isFlipped}
 						flipCard={props.flipCard}
-						disableClick={props.disableClick}
 					/>
 				)}
 			</div>

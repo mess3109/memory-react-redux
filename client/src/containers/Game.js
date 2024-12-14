@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import Cards from '../components/Cards'
 import NameForm from '../components/NameForm'
-import { shuffle, backupImages } from '../helpers/game'
+import { initiateCards, checkGameOver } from '../helpers/game'
 import '../styles/Cards.css'
 
 const Game = () => {
-
   const history = useHistory();
-  const [props, setProps] = useState({})
+  const [props, setProps] = useState({ counter: 0 })
   const [loading, setLoading] = useState(true)
   const [flippedCards, setFlippedCards] = useState([])
   const [cards, setCards] = useState([])
-  const [counter, setCounter] = useState(0)
   const [disableClick, setDisableClick] = useState(false)
   const [isGameOver, setIsGameOver] = useState(false)
 
@@ -28,80 +26,62 @@ const Game = () => {
     if (flippedCards.length === 2) {
       checkMatch()
     }
-  }, [JSON.stringify(cards), JSON.stringify(flippedCards), isGameOver])
-
+  }, [JSON.stringify(flippedCards)])
 
   const checkMatch = () => {
-
-    if (flippedCards[0].image !== flippedCards[1].image) {
-      cards.find(card => card.id === flippedCards[0].id).isFlipped = false
-      cards.find(card => card.id === flippedCards[1].id).isFlipped = false
+    const tempCards = [...cards]
+    const card0 = tempCards.find(card => card.id === flippedCards[0]);
+    const card1 = tempCards.find(card => card.id === flippedCards[1]);
+    if (card0.image !== card1.image) {
+      card0.isFlipped = false
+      card1.isFlipped = false
     }
 
-    const unflippedCard = cards.find((card) => { return card.isFlipped === false })
-
-    if (!unflippedCard) {
+    if (checkGameOver(cards)) {
       setIsGameOver(true)
+      return;
     }
 
     setTimeout(() => {
-      setCards([...cards])
-      setFlippedCards([])
       setDisableClick(false)
+      setCards(tempCards)
+      setFlippedCards([])
     }, 1000);
   }
 
   const handleArtistSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
 
     fetch(`/api/artists/${props.artistSlug}/images`)
       .then(response => response.json())
       .then(data => setProps({ ...props, images: data.images }))
       .then(() => {
-        let originalCards = backupImages;
-        if (flippedCards.length !== 2) {
-          if (props.images && props.images.length > 0) {
-            originalCards = images.map(image => image.url)
-            while (originalCards.length < 10) {
-              let num = Math.floor(Math.random() * backupImages.length)
-              if (!originalCards.find(image => image === backupImages[num])) {
-                originalCards.push(backupImages[num])
-              }
-            }
-          }
-
-          //Test environment
-          if (process.env.REACT_APP_MAX_CARDS > 0) {
-            originalCards = originalCards.slice(0, process.env.REACT_APP_MAX_CARDS)
-          }
-          let images = shuffle(originalCards.concat(originalCards))
-
-          let cards = []
-          for (let i = 0; i < images.length; i++) {
-            cards[i] = {
-              id: i,
-              image: images[i],
-              isFlipped: false
-            }
-          }
-          setCards([...cards])
-        }
-      })
+        const newCards = initiateCards(props.images)
+        setCards([...newCards])
+        setProps({ ...props, counter: 0 })
+      }).then(() => setLoading(false))
   }
 
   const flipCard = (id) => {
-    cards[id].isFlipped = true;
+    const tempFlippedCards = [...flippedCards]
 
-    if ((flippedCards.length === 0 || flippedCards[0].id !== id) && flippedCards.length < 2) {
-      flippedCards.push(cards[id])
+    //Do nothing is click is disabled or if a card is clicked twice
+    if (disableClick || (tempFlippedCards.length > 0 && tempFlippedCards[0] === id)) {
+      return;
     }
-    if (flippedCards.length === 2) {
-      setCounter(counter + 1)
+
+    const tempCards = [...cards];
+
+    tempCards[id].isFlipped = true;
+    tempFlippedCards.push(id)
+    setCards(tempCards)
+    setFlippedCards([...tempFlippedCards])
+
+    if (tempFlippedCards.length === 2) {
       setDisableClick(true)
+      setProps({ ...props, counter: props.counter + 1 })
     }
-
-    setCards([...cards])
-    setFlippedCards(flippedCards)
   }
 
   const handleSubmit = (e) => {
@@ -109,7 +89,7 @@ const Game = () => {
 
     const score = JSON.stringify({
       game: {
-        total: counter,
+        total: props.counter,
         name: props.name,
         artistSlug: props.artistSlug,
       }
@@ -141,16 +121,20 @@ const Game = () => {
         </label>
         <button>Start New Game</button>
       </form>
-      <div className="turn-count">Round: {counter}</div>
+      <div className="turn-count">Round: {props.counter}</div>
       {!props.loading && cards.length > 0 &&
-        < Cards
+        <Cards
           cards={cards}
           flipCard={flipCard}
           disableClick={disableClick}
         />
       }
       {isGameOver &&
-        <NameForm handleSubmit={(e) => handleSubmit(e)} handleChange={(e) => setProps({ ...props, name: e.target.value })} gameOver={isGameOver} name={props.name} />
+        <NameForm
+          handleSubmit={(e) => handleSubmit(e)}
+          handleChange={(e) => setProps({ ...props, name: e.target.value })}
+          gameOver={isGameOver} name={props.name}
+        />
       }
     </div>
   );
